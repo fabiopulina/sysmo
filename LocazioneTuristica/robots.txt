@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.sanchioli.it/sitemap.xml
+Sitemap: https://www.magentastay.it/sitemap.xml

@@ -1,38 +1,27 @@
-# LocazioneTuristica (Sanchioli)
+# Magenta Stay
 
-Sito vetrina statico per locazioni turistiche a Magenta (MI), ottimizzato SEO per:
+Sito statico per `https://www.magentastay.it`.
 
-- Fiera Milano Rho / Expo
-- Aeroporto Malpensa
-- Milano
-- Parco del Ticino
+## Menu
+Solo **Annunci** (elenco strutture) e link alle schede (es. Sanchioli 11).
+Le landing SEO (Fiera / Malpensa / …) restano per Google, non nel menu.
 
-## Struttura
+## Messaggio chiave
+**15 min Rho Fiera · 20 min Malpensa** — anche in inglese (`/en/`) per ospiti esteri.
 
-- `index.html` — home portale multi-struttura
-- `strutture/sanchioli-11/` — prima LT (Via Sanchioli 11)
-- `fiera-rho-expo/`, `malpensa/`, `milano/`, `parco-ticino/` — landing SEO
-- `immagini/` — foto JPG
-- `css/`, `js/`
+## Deploy GitHub → Aruba FTP
+Workflow: `.github/workflows/deploy-aruba-ftp.yml`
 
-## Pubblicazione (Register / Aruba)
+Aggiungi in GitHub → Settings → Secrets and variables → Actions:
 
-1. Copia tutto il contenuto di questa cartella nella `public_html` (o cartella web) dell’hosting.
-2. Punta il dominio (es. `sanchioli.it`) e aggiorna i canonical / sitemap se il dominio è diverso.
-3. Invia `sitemap.xml` in Google Search Console.
+| Secret | Esempio |
+|--------|---------|
+| `ARUBA_FTP_HOST` | `89.46.110.19` |
+| `ARUBA_FTP_USER` | utente FTP Aruba |
+| `ARUBA_FTP_PASSWORD` | password FTP |
+| `ARUBA_FTP_REMOTE_DIR` | `/www.magentastay.it/` |
 
-## AvaiBook
+Poi: Actions → “Deploy Magenta Stay to Aruba FTP” → Run workflow  
+oppure push su questo branch.
 
-Nella scheda struttura, sezione `#prenota`, sostituisci il box placeholder con il widget / booking engine AvaiBook quando hai le credenziali API.
-
-## Aggiungere un’altra LT
-
-1. Crea `strutture/nome-struttura/index.html` (copia da sanchioli-11).
-2. Aggiungi foto in `immagini/nome-struttura/`.
-3. Collega la card nella home e aggiorna `sitemap.xml` + `js/main.js` (`SANCHIOLI_LISTINGS`).
-
-## Brand / contatti da completare
-
-- Dominio reale (ora placeholder `www.sanchioli.it`)
-- Telefono / WhatsApp / email in `contatti/` e footer
-- Eventuali foto proprietarie al posto di quelle scaricate dall’annuncio Airbnb
+Il Mac resta solo backup: non serve più caricare a mano da Finder.

@@ -73,10 +73,8 @@ if [ -n "${SRC}" ]; then
   done < <(find "$SRC" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.png' \) | sort)
   echo "Copiate $((i-1)) foto in immagini/sanchioli-11/"
 else
-  echo "Nessuna sottocartella foto trovata automaticamente."
-  echo "Se le tue foto sono già in una cartella, esegui ad esempio:"
-  echo "  mkdir -p \"$DEST/immagini/sanchioli-11\""
-  echo "  cp \"$DEST/NOME_SOTTOCARTELLA\"/*.{jpg,JPG,jpeg,JPEG} \"$DEST/immagini/sanchioli-11/\" 2>/dev/null"
+  echo "Nessuna cartella Foto trovata in: $DEST"
+  echo "Metti le JPG in \"$DEST/Foto\" e rilancia lo script."
 fi
 
 echo ""

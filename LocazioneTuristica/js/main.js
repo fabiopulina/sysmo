@@ -1,44 +1,32 @@
 (function () {
-  var toggle = document.querySelector(".nav-toggle");
+  var btn = document.querySelector(".menu-btn");
   var nav = document.querySelector(".nav");
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  if (btn && nav) {
+    btn.addEventListener("click", function () {
+      var open = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
     });
   }
 
-  var reveals = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && reveals.length) {
+  var nodes = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(
       function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            io.unobserve(entry.target);
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add("on");
+            io.unobserve(e.target);
           }
         });
       },
-      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
     );
-    reveals.forEach(function (el) {
-      io.observe(el);
+    nodes.forEach(function (n) {
+      io.observe(n);
     });
   } else {
-    reveals.forEach(function (el) {
-      el.classList.add("is-visible");
+    nodes.forEach(function (n) {
+      n.classList.add("on");
     });
   }
-
-  // Registry for multiple tourist rentals (extend as new LT pages are added)
-  window.SANCHIOLI_LISTINGS = window.SANCHIOLI_LISTINGS || [
-    {
-      id: "sanchioli-11",
-      name: "Sanchioli 11",
-      city: "Magenta (MI)",
-      path: "strutture/sanchioli-11/",
-      guests: 2,
-      highlight: "Fiera Rho · Malpensa · Milano"
-    }
-  ];
 })();
