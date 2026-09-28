@@ -94,8 +94,8 @@ p { margin: 0 0 1em; }
 .hero__veil {
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(10,18,16,.45) 0%, rgba(10,18,16,.2) 38%, rgba(10,18,16,.82) 100%),
-    linear-gradient(90deg, rgba(10,18,16,.5), transparent 60%);
+    linear-gradient(180deg, rgba(10,45,52,.42) 0%, rgba(10,45,52,.18) 38%, rgba(8,40,48,.78) 100%),
+    linear-gradient(90deg, rgba(10,45,52,.48), transparent 60%);
 }
 .hero__copy {
   position: relative; z-index: 2; padding: 0 0 4.2rem;
