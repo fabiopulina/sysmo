@@ -3,45 +3,45 @@
   <desc id="mapDesc">Estratto schematico: Magenta al centro, Malpensa, Rho Fiera, Milano e Parco del Ticino.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#e8f0ea"/>
-      <stop offset="100%" stop-color="#f3ebe2"/>
+      <stop offset="0%" stop-color="#dff4f7"/>
+      <stop offset="100%" stop-color="#eef8fa"/>
     </linearGradient>
     <linearGradient id="park" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#9fbf9a"/>
-      <stop offset="100%" stop-color="#6f9470"/>
+      <stop offset="0%" stop-color="#8dcb9b"/>
+      <stop offset="100%" stop-color="#5fa978"/>
     </linearGradient>
   </defs>
   <rect width="800" height="560" fill="url(#bg)"/>
   <!-- soft roads -->
-  <path d="M40 300 H760" stroke="#c9b8a4" stroke-width="10" stroke-linecap="round" opacity=".55"/>
-  <path d="M420 40 V520" stroke="#c9b8a4" stroke-width="8" stroke-linecap="round" opacity=".4"/>
-  <path d="M120 480 C260 420, 360 360, 520 280 S720 160, 760 120" stroke="#b7a089" stroke-width="6" fill="none" opacity=".45"/>
+  <path d="M40 300 H760" stroke="#a8c8d0" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+  <path d="M420 40 V520" stroke="#a8c8d0" stroke-width="8" stroke-linecap="round" opacity=".4"/>
+  <path d="M120 480 C260 420, 360 360, 520 280 S720 160, 760 120" stroke="#8fb6c0" stroke-width="6" fill="none" opacity=".45"/>
   <!-- Ticino park band -->
   <ellipse cx="170" cy="330" rx="150" ry="160" fill="url(#park)" opacity=".55"/>
-  <text x="95" y="250" fill="#244028" font-family="Outfit, Helvetica, sans-serif" font-size="15" font-weight="700">Parco del Ticino</text>
-  <text x="110" y="272" fill="#315038" font-family="Outfit, Helvetica, sans-serif" font-size="12">natura · ciclovie · Navigli</text>
+  <text x="95" y="250" fill="#1f4a2e" font-family="Outfit, Helvetica, sans-serif" font-size="15" font-weight="700">Parco del Ticino</text>
+  <text x="110" y="272" fill="#2f6340" font-family="Outfit, Helvetica, sans-serif" font-size="12">natura · ciclovie · Navigli</text>
   <!-- Milano blob -->
-  <circle cx="640" cy="250" r="70" fill="#dfe8ea"/>
-  <circle cx="640" cy="250" r="48" fill="#c5d5da"/>
-  <text x="605" y="245" fill="#1c2a2e" font-family="Outfit, Helvetica, sans-serif" font-size="18" font-weight="700">Milano</text>
-  <text x="592" y="266" fill="#42555a" font-family="Outfit, Helvetica, sans-serif" font-size="11">Garibaldi · Centrale</text>
+  <circle cx="640" cy="250" r="70" fill="#cfe8ee"/>
+  <circle cx="640" cy="250" r="48" fill="#9fd0db"/>
+  <text x="605" y="245" fill="#102428" font-family="Outfit, Helvetica, sans-serif" font-size="18" font-weight="700">Milano</text>
+  <text x="592" y="266" fill="#3a5a64" font-family="Outfit, Helvetica, sans-serif" font-size="11">Garibaldi · Centrale</text>
   <!-- Rho Fiera -->
-  <rect x="500" y="120" width="120" height="54" rx="10" fill="#1f6f6c"/>
+  <rect x="500" y="120" width="120" height="54" rx="10" fill="#0c6f78"/>
   <text x="518" y="142" fill="#fff" font-family="Outfit, Helvetica, sans-serif" font-size="13" font-weight="700">Rho Fiera</text>
   <text x="528" y="160" fill="#d7efed" font-family="Outfit, Helvetica, sans-serif" font-size="11">Expo · ~15 min</text>
   <!-- Malpensa -->
-  <rect x="90" y="70" width="140" height="54" rx="10" fill="#8c4a32"/>
+  <rect x="90" y="70" width="140" height="54" rx="10" fill="#c45f48"/>
   <text x="112" y="92" fill="#fff" font-family="Outfit, Helvetica, sans-serif" font-size="13" font-weight="700">Malpensa</text>
   <text x="118" y="110" fill="#f3d9cb" font-family="Outfit, Helvetica, sans-serif" font-size="11">MXP · ~20 min</text>
   <!-- Magenta center -->
-  <circle cx="360" cy="300" r="54" fill="#0d5c59"/>
+  <circle cx="360" cy="300" r="54" fill="#1a7f8c"/>
   <circle cx="360" cy="300" r="54" fill="none" stroke="#fff" stroke-width="3" opacity=".55"/>
   <text x="328" y="296" fill="#fff" font-family="Fraunces, Georgia, serif" font-size="18" font-weight="600">Magenta</text>
   <text x="318" y="318" fill="#cfeae8" font-family="Outfit, Helvetica, sans-serif" font-size="11">Magenta Stay</text>
   <!-- connectors -->
-  <path d="M360 250 L560 174" stroke="#0d5c59" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
-  <path d="M320 260 L220 124" stroke="#8c4a32" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
-  <path d="M410 285 L580 260" stroke="#5a6b66" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
-  <path d="M310 330 L230 330" stroke="#6f9470" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
-  <text x="40" y="530" fill="#5c6b66" font-family="Outfit, Helvetica, sans-serif" font-size="12">Schema illustrativo · tempi indicativi in auto</text>
+  <path d="M360 250 L560 174" stroke="#0c6f78" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
+  <path d="M320 260 L220 124" stroke="#c45f48" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
+  <path d="M410 285 L580 260" stroke="#4a7a86" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
+  <path d="M310 330 L230 330" stroke="#5fa978" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
+  <text x="40" y="530" fill="#4a6570" font-family="Outfit, Helvetica, sans-serif" font-size="12">Schema illustrativo · tempi indicativi in auto</text>
 </svg>
