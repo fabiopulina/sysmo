@@ -1,67 +1,80 @@
-# Fix sync Mac (zsh)
+# Backup Mac + upload Aruba (da casa)
 
-Esegui **tutto questo blocco** nel Terminale (una sola volta).
+Il Cloud Agent / GitHub Actions non può caricare bene su Aruba col filtro IP.
+Flusso: **GitHub → Mac (backup) → FileZilla (IP casa) → Aruba**.
+
+## 1) Aggiorna la copia sul Mac
+
+Apri **Terminale** e incolla tutto:
 
 ```bash
 setopt NULL_GLOB
-cd "/Users/fabio/Documents/Progetti/Siti Web"
+DEST="/Users/fabio/Documents/Progetti/Siti Web/LocazioneTuristica"
 
-# 1) Dove sono le foto?
-echo "=== contenuto Siti Web ==="
-ls -la
-echo "=== contenuto LocazioneTuristica (se c'è) ==="
-ls -la LocazioneTuristica 2>/dev/null || echo "(non esiste ancora)"
-echo "=== cerca cartelle Foto ==="
-find . -maxdepth 3 -type d -name 'Foto' 2>/dev/null
-echo "=== file immagine trovati ==="
-find . -maxdepth 4 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.heic' -o -iname '*.png' -o -iname '*.webp' \) 2>/dev/null | head -40
-
-# 2) Aggiorna il sito da GitHub
 rm -rf /tmp/sysmo-lt
 git clone --branch cursor/locazione-turistica-sanchioli-9e06 --single-branch \
   https://github.com/fabiopulina/sysmo.git /tmp/sysmo-lt
 
-mkdir -p LocazioneTuristica
-rsync -a /tmp/sysmo-lt/LocazioneTuristica/ LocazioneTuristica/ \
-  --exclude 'immagini/sanchioli-11/' \
-  --exclude 'Foto/'
+mkdir -p "$DEST"
+# Aggiorna i file del sito; non toccare una eventuale cartella Foto di backup
+rsync -a /tmp/sysmo-lt/LocazioneTuristica/ "$DEST/" \
+  --exclude 'Foto/' \
+  --exclude '.DS_Store'
 
-# 3) Copia foto da LocazioneTuristica/Foto (se presente)
-mkdir -p LocazioneTuristica/immagini/sanchioli-11
-rm -f LocazioneTuristica/immagini/sanchioli-11/foto-*
-
-FOTO_DIR=""
-if [ -d "LocazioneTuristica/Foto" ]; then
-  FOTO_DIR="LocazioneTuristica/Foto"
-elif [ -d "Foto" ]; then
-  FOTO_DIR="Foto"
-fi
-
-echo "Cartella foto usata: ${FOTO_DIR:-NON TROVATA}"
-if [ -n "$FOTO_DIR" ]; then
-  ls -la "$FOTO_DIR"
+# Se hai ancora JPG in Foto/ e vuoi riallineare immagini/sanchioli-11:
+if [ -d "$DEST/Foto" ]; then
+  mkdir -p "$DEST/immagini/sanchioli-11"
   i=1
-  for f in "$FOTO_DIR"/*; do
+  for f in "$DEST/Foto"/*; do
     [ -f "$f" ] || continue
     case "${f:l}" in
-      *.jpg|*.jpeg|*.png|*.webp|*.heic)
+      *.jpg|*.jpeg|*.png|*.webp)
         printf -v n "%02d" "$i"
-        ext="${f##*.}"
-        ext="${ext:l}"
-        # HEIC: meglio convertire in jpg sul Mac; per ora copia com'è
-        cp -f "$f" "LocazioneTuristica/immagini/sanchioli-11/foto-${n}.${ext}"
+        ext="${f##*.}"; ext="${ext:l}"
+        cp -f "$f" "$DEST/immagini/sanchioli-11/foto-${n}.${ext}"
         i=$((i+1))
         ;;
     esac
   done
-  echo "Copiate $((i-1)) foto"
-  ls -la LocazioneTuristica/immagini/sanchioli-11 | head
-else
-  echo "Metti le foto in:"
-  echo "  /Users/fabio/Documents/Progetti/Siti Web/LocazioneTuristica/Foto"
+  echo "Foto allineate: $((i-1))"
 fi
 
-open "/Users/fabio/Documents/Progetti/Siti Web/LocazioneTuristica"
+echo "Backup pronto in: $DEST"
+ls "$DEST"
+open "$DEST"
 ```
 
-Incolla qui l’output delle sezioni `===` (soprattutto dove trova `Foto` e i file immagine).
+## 2) Carica su Aruba (FileZilla, dalla rete di casa)
+
+| Campo | Valore |
+|--------|--------|
+| Host | `ftp.magentastay.it` |
+| Utente | utente FTP Aruba |
+| Password | password FTP |
+| Porta | `21` |
+| Modalità | passiva |
+
+Cartella remota: **`www.magentastay.it`** (non `cgi-bin`).
+
+**A sinistra (locale):**  
+`/Users/fabio/Documents/Progetti/Siti Web/LocazioneTuristica`
+
+Seleziona e trascina a destra:
+- `index.html`
+- `css/`
+- `js/`
+- `immagini/` (importante: le foto)
+- `strutture/`
+- `en/`
+- `contatti/`
+- `fiera-rho-expo/` `malpensa/` `milano/` `parco-ticino/`
+- `robots.txt` `sitemap.xml` `.htaccess`
+
+Sovrascrivi tutto (alcuni file sul server sono vuoti/corrotti).
+
+Poi rinomina sul server: `index.php` → `index.php.bak`.
+
+## 3) Verifica
+
+Apri https://www.magentastay.it  
+Devi vedere **Magenta Stay**, menu **Annunci**, foto visibili, testo **15 min Rho Fiera · 20 min Malpensa**.
