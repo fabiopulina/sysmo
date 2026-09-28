@@ -5,3 +5,6 @@
 - `immagini/magenta/magenta-storica.jpg` — *Magenta-Paul-Gravet* · Wikimedia Commons
 
 Fonte: https://commons.wikimedia.org/
+
+- ticino-valle.jpg, ticino-riva.jpg, ticino-parco.jpg — Wikimedia Commons (Parco/Valle del Ticino)
+- mappa-ovest-milano.svg — schema originale Magenta Stay

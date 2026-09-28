@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contatti | Magenta Stay</title>
-  <meta name="description" content="Contatta Magenta Stay — Magenta (MI), Malpensa, Rho Fiera.">
+  <meta name="description" content="Contatta Magenta Stay — Magenta (MI).">
   <link rel="canonical" href="https://www.magentastay.it/contatti/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,8 @@
   <header class="top top--solid">
     <div class="wrap top__row">
       <a class="logo" href="/">Magenta <span>Stay</span></a>
-      <nav class="nav" id="nav">
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav" aria-label="Principale">
         <a href="/">Home</a>
         <a class="pill" href="/strutture/">Annunci</a>
       </nav>
@@ -36,7 +37,12 @@
       </div>
     </div>
   </main>
-  <footer class="foot"><div class="wrap"><a href="/">Magenta Stay</a></div></footer>
+  <footer class="foot">
+    <div class="wrap foot__row">
+      <div>Magenta Stay</div>
+      <div><a href="/">Home</a> · <a href="/strutture/">Annunci</a></div>
+    </div>
+  </footer>
   <script src="/js/main.js" defer></script>
 </body>
 </html>

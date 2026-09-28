@@ -8,16 +8,17 @@
   <link rel="canonical" href="https://www.magentastay.it/milano/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-    <header class="top top--solid">
+      <header class="top top--solid">
     <div class="wrap top__row">
       <a class="logo" href="/">Magenta <span>Stay</span></a>
-      <nav class="nav" id="nav">
-        <a href="/strutture/">Annunci</a>
-        <a class="btn" href="/strutture/sanchioli-11/" style="color:#14201e;background:#fff;text-decoration:none;padding:.7rem 1rem;font-weight:650">Sanchioli 11</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav" aria-label="Principale">
+        <a href="/">Home</a>
+        <a class="pill" href="/strutture/">Annunci</a>
       </nav>
     </div>
   </header>
@@ -32,10 +33,15 @@
   <main class="block">
     <div class="wrap prose reveal">
       <p>Visiti <strong>Milano</strong> e vuoi un alloggio fuori dal caos del centro? Magenta Stay offre spazio, cucina e collegamenti verso la città.</p>
-      <p><a class="btn btn-primary" href="/#prenota">Prenota</a></p>
+      <p><a class="btn btn-primary" href="/strutture/sanchioli-11/#prenota">Prenota</a></p>
     </div>
   </main>
-  <footer class="foot"><div class="wrap"><a href="/">Magenta Stay</a></div></footer>
+    <footer class="foot">
+    <div class="wrap foot__row">
+      <div>Magenta Stay</div>
+      <div><a href="/">Home</a> · <a href="/strutture/">Annunci</a></div>
+    </div>
+  </footer>
   <script src="/js/main.js" defer></script>
 </body>
 </html>
