@@ -43,15 +43,25 @@ fi
 
 echo ""
 echo "Cerco sottocartelle foto in: $DEST"
-PHOTO_DIRS=$(find "$DEST" -maxdepth 2 -type d \( -iname 'foto' -o -iname 'fotos' -o -iname 'photo' -o -iname 'photos' -o -iname 'img' -o -iname 'images' -o -iname 'originali' \) 2>/dev/null || true)
-
+# Preferisci esplicitamente la cartella "Foto" (nome usato sul Mac di Fabio)
 mkdir -p "$DEST/immagini/sanchioli-11"
 
-if [ -n "${PHOTO_DIRS}" ]; then
-  echo "Trovate cartelle foto:"
-  echo "$PHOTO_DIRS"
-  SRC=$(echo "$PHOTO_DIRS" | head -1)
-  echo "Uso: $SRC"
+SRC=""
+if [ -d "$DEST/Foto" ]; then
+  SRC="$DEST/Foto"
+elif [ -d "$DEST/foto" ]; then
+  SRC="$DEST/foto"
+else
+  PHOTO_DIRS=$(find "$DEST" -maxdepth 2 -type d \( -iname 'foto' -o -iname 'fotos' -o -iname 'photo' -o -iname 'photos' -o -iname 'img' -o -iname 'images' -o -iname 'originali' \) 2>/dev/null || true)
+  if [ -n "${PHOTO_DIRS}" ]; then
+    echo "Trovate cartelle foto:"
+    echo "$PHOTO_DIRS"
+    SRC=$(echo "$PHOTO_DIRS" | head -1)
+  fi
+fi
+
+if [ -n "${SRC}" ]; then
+  echo "Uso le foto da: $SRC"
   i=1
   # Preferisci jpg/jpeg/webp
   while IFS= read -r f; do
