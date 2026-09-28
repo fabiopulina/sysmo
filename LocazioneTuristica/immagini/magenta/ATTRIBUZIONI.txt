@@ -1,0 +1,7 @@
+# Attribution immagini storiche (Wikimedia Commons)
+
+- `immagini/magenta/gamba-de-legn.jpg` — *Milano, corso Vercelli (tram)* · PD-Italy · Gamba de Legn
+- `immagini/magenta/piazza-liberazione.jpg` — *Magenta-piazza Liberazione* · Wikimedia Commons
+- `immagini/magenta/magenta-storica.jpg` — *Magenta-Paul-Gravet* · Wikimedia Commons
+
+Fonte: https://commons.wikimedia.org/
