@@ -17,14 +17,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check FTP secrets
+        env:
+          FTP_USER: ${{ secrets.ARUBA_FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.ARUBA_FTP_PASSWORD }}
+        run: |
+          missing=0
+          if [ -z "$FTP_USER" ]; then
+            echo "::error::Manca il secret ARUBA_FTP_USER (Settings → Secrets and variables → Actions)"
+            missing=1
+          fi
+          if [ -z "$FTP_PASSWORD" ]; then
+            echo "::error::Manca il secret ARUBA_FTP_PASSWORD"
+            missing=1
+          fi
+          if [ "$missing" -ne 0 ]; then
+            echo "Crea i secret e rilancia: Actions → Deploy Magenta Stay to Aruba FTP → Run workflow"
+            exit 1
+          fi
+          echo "Secret USER/PASSWORD presenti. Host fisso: ftp.magentastay.it"
+
       - name: Deploy LocazioneTuristica via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.ARUBA_FTP_HOST }}
+          server: ftp.magentastay.it
           username: ${{ secrets.ARUBA_FTP_USER }}
           password: ${{ secrets.ARUBA_FTP_PASSWORD }}
           local-dir: ./LocazioneTuristica/
-          server-dir: ${{ secrets.ARUBA_FTP_REMOTE_DIR }}
+          server-dir: /www.magentastay.it/
           protocol: ftp
           dangerous-clean-slate: false
           exclude: |
