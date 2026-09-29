@@ -1,6 +1,24 @@
-# Apache (Aruba / Register) — abilita compressione e cache base
+# Apache (Aruba / Register) — compressione, cache, SEO alias
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # SEO keyword aliases -> landing Fiera Rho (B&B / appartamenti)
+  RewriteRule ^bb-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^b-and-b-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^appartamenti-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^appartamento-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^appartamento-fiera-milano/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^appartamenti-fiera-milano/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^hotel-vicino-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^hotel-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^alloggio-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^alloggio-fiera-milano/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^casa-vacanze-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^dormire-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^dormire-vicino-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^locazione-turistica-fiera-milano/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^affittacamere-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^strutture/([a-z0-9\-]+)/?$ strutture/$1/index.html [L]

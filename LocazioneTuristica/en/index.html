@@ -3,14 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Magenta Stay | Why Magenta beats downtown for Malpensa &amp; Rho Fiera</title>
-  <meta name="description" content="Stay in Magenta, Italy: ~20 min to Malpensa, ~15 min to Milan Rho Fiera Expo, frequent trains to Porta Garibaldi and Centrale. Historic Gamba de Legn story and modern listings.">
+  <title>Magenta Stay | Ideal base for Malpensa, Rho Fiera and Milan</title>
+  <meta name="description" content="Stay in Magenta: ~20 min to Malpensa, ~15 min to Milan Rho Fiera Expo, frequent trains to Porta Garibaldi and Centrale. Tourist rentals near the fair.">
   <link rel="canonical" href="https://www.magentastay.it/en/">
-  <link rel="alternate" hreflang="en" href="https://www.magentastay.it/en/">
   <link rel="alternate" hreflang="it" href="https://www.magentastay.it/">
+  <link rel="alternate" hreflang="en" href="https://www.magentastay.it/en/">
+  <link rel="alternate" hreflang="de" href="https://www.magentastay.it/de/">
+  <link rel="alternate" hreflang="fr" href="https://www.magentastay.it/fr/">
+  <link rel="alternate" hreflang="x-default" href="https://www.magentastay.it/">
+  <meta property="og:title" content="Magenta Stay | Ideal base for Malpensa, Rho Fiera and Milan">
+  <meta property="og:description" content="Stay in Magenta: ~20 min to Malpensa, ~15 min to Milan Rho Fiera Expo, frequent trains to Porta Garibaldi and Centrale. Tourist rentals near the fair.">
+  <meta property="og:image" content="/immagini/magenta/piazza-liberazione.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -19,58 +26,142 @@
       <a class="logo" href="/en/">Magenta <span>Stay</span></a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
       <nav class="nav" id="nav">
-        <a href="/en/#why">Why Magenta</a>
-        <a class="pill" href="/strutture/">Listings</a>
+        <a href="#mappa">Map</a>
+        <a href="#perche">Why Magenta</a>
+        <a class="pill" href="/en/strutture/">Listings</a>
       </nav>
     </div>
   </header>
-
   <main>
-    <section class="hero">
+    <section class="hero" aria-label="Hero">
       <div class="hero__media" aria-hidden="true">
-        <img src="/immagini/magenta/gamba-de-legn.jpg" alt="" width="2566" height="1876" fetchpriority="high">
+        <img src="/immagini/magenta/piazza-liberazione.jpg" alt="" width="3264" height="2448" fetchpriority="high">
       </div>
       <div class="hero__veil" aria-hidden="true"></div>
       <div class="wrap hero__copy">
         <span class="hero__kicker">Magenta · Lombardy · Italy</span>
         <p class="hero__brand">Magenta Stay</p>
-        <h1 class="hero__lead">Best base for Malpensa, Rho Fiera and Milan</h1>
-        <p class="hero__text">
-          ~20 minutes to Malpensa Airport, ~15 minutes to Milan Rho Fiera / Expo, frequent trains toward Milano Porta Garibaldi and Centrale.
-          Same west-Milan corridor once served by the legendary steam tram <em>Gamba de Legn</em>.
-        </p>
+        <h1 class="hero__lead">The right base between Malpensa, Rho Fiera and Milan</h1>
+        <p class="hero__text">West Milan has always been a gateway to the city: once with the Gamba de Legn steam tram, today with trains, motorway and airport.<span class="hero__en">~20 min to Malpensa · ~15 min to Rho Fiera Expo · frequent trains to Milan.</span></p>
         <div class="actions">
-          <a class="btn btn-primary" href="/strutture/">Browse listings</a>
-          <a class="btn btn-ghost" href="/en/#why">Why Magenta</a>
+          <a class="btn btn-primary" href="/en/strutture/">See listings</a>
+          <a class="btn btn-ghost" href="#mappa">View the map</a>
         </div>
       </div>
     </section>
-
-    <section class="block" id="why">
-      <div class="wrap reveal">
-        <span class="label">Why Magenta</span>
-        <h2 class="title">Fair + airport + city, one stay</h2>
-        <p class="block__text">
-          Northern European exhibitors and travelers often search for lodging near Rho Fiera or Malpensa.
-          Magenta sits in the sweet spot: quieter than Milan center, faster than remote countryside hotels.
-        </p>
-        <div class="times">
-          <div class="time"><strong>~20 min</strong><span>Malpensa (MXP)</span></div>
-          <div class="time"><strong>~15 min</strong><span>Rho Fiera / Expo</span></div>
-          <div class="time"><strong>frequent</strong><span>Trains to Milan</span></div>
-          <div class="time"><strong>near</strong><span>Ticino Park</span></div>
+    <section class="block block--fog" id="mappa">
+      <div class="wrap reveal reveal--scale">
+        <span class="label">Orientation</span>
+        <h2 class="title">Magenta at the centre of the map</h2>
+        <p class="block__text">Real street map: from Magenta reach <strong>Malpensa</strong>, <strong>Rho Fiera</strong>, <strong>Milan</strong> and <strong>Ticino Park</strong>. Zoom and pan to explore connections.</p>
+        <div class="map-frame map-frame--street">
+          <div id="map-street" class="map-street" role="region" aria-label="Map"></div>
+          <p class="map-note"><a href="https://www.openstreetmap.org/#map=11/45.52/8.95" rel="noopener noreferrer" target="_blank">Open in OpenStreetMap</a> · click the map to enable scroll zoom</p>
         </div>
-        <p style="margin-top:1.8rem"><a class="btn btn-dark" href="/strutture/sanchioli-11/">Open Sanchioli 11</a></p>
+      </div>
+    </section>
+    <section class="block" id="perche">
+      <div class="wrap reveal">
+        <span class="label">Why stay in Magenta</span>
+        <h2 class="title">Three doors, one base</h2>
+        <p class="block__text">Looking for lodging for <strong>Rho Fiera / Expo</strong>, a <strong>Malpensa</strong> arrival or a <strong>Milan</strong> visit? Magenta is the balance point: residential calm, walkable services, clear travel times.</p>
+        <div class="times stagger">
+          <div class="time"><strong>~20 min</strong><span>Malpensa Airport (MXP)</span></div>
+          <div class="time"><strong>~15 min</strong><span>Milan Rho Fiera / Expo</span></div>
+          <div class="time"><strong>~15–30′</strong><span>Trains to Milan (frequent)</span></div>
+          <div class="time"><strong>nearby</strong><span>Ticino Park &amp; Navigli</span></div>
+        </div>
+        <p style="margin-top:1.4rem"><a href="/en/rho-fiera-accommodation/">B&amp;B and apartments near Rho Fiera</a></p>
+      </div>
+    </section>
+    <section class="block block--magenta" id="colore">
+      <div class="wrap reveal reveal--left">
+        <span class="label">The name</span>
+        <h2 class="title">Why the colour is called magenta</h2>
+        <p class="block__text">In <strong>1859</strong>, at the Battle of Magenta, Franco-Piedmontese forces defeated Austria. Soon after, a vivid aniline dye in France was named <strong>magenta</strong> after that victory — so the Lombard town also named a colour used worldwide.</p>
+      </div>
+    </section>
+    <section class="block" id="milano">
+      <div class="wrap split reveal">
+        <div>
+          <span class="label">Milan without the chaos</span>
+          <h2 class="title">Trains to Garibaldi and Centrale</h2>
+          <p class="block__text">From Magenta station, rail links reach <strong>Porta Garibaldi</strong> and <strong>Milano Centrale</strong>, then metro and downtown. In peak hours trains are often about every <strong>15 minutes</strong> (line and timetable depending): enjoy the city by day, sleep in a real apartment at night.</p>
+          <p class="block__text">Ideal if you want Duomo, Navigli, museums or meetings without downtown hotel prices.</p>
+        </div>
+        <figure class="frame">
+          <img src="/immagini/magenta/piazza-liberazione.jpg" alt="Piazza Liberazione, Magenta" width="1600" height="1200" loading="lazy">
+        </figure>
+      </div>
+    </section>
+    <section class="block block--ink" id="fiera-malpensa">
+      <div class="wrap reveal reveal--scale">
+        <span class="label">Fairs &amp; airport</span>
+        <h2 class="title">Rho Expo and Malpensa on the same map</h2>
+        <p class="block__text">International exhibitors (especially from Northern Europe) search for “hotel near Rho Fiera” or “apartment near Malpensa”. Magenta answers both: about <strong>15 minutes to the fair</strong> and <strong>20 minutes to MXP</strong>. One base for flight + event.</p>
+        <div class="story stagger">
+          <article><h3>For the fair</h3><p>Come back from the venue, cook, WiFi and rest. Parking and predictable times beat a generic “near fair” hotel.</p></article>
+          <article><h3>For Malpensa</h3><p>Evening landing, short transfer, equipped home. Next day you can go to the fair or into the city.</p></article>
+          <article><h3>For international guests</h3><p>Clear travel times, residential calm, and listings ready for direct booking (AvaiBook sync coming).</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="block" id="storia">
+      <div class="wrap reveal reveal--right">
+        <span class="label">Magenta memory</span>
+        <h2 class="title">The Gamba de Legn</h2>
+        <p class="block__text">From the late 1800s to 1957, the <strong>steam tram</strong> nicknamed <strong>Gamba de Legn</strong> linked Magenta (and Castano) to Milan — a symbol of commuters, markets and wartime evacuations. Historic Milan terminus: Piazzale Baracca then <strong>Corso Vercelli</strong>. Last run: <strong>31 August 1957</strong>; a locomotive is now at the Science and Technology Museum.</p>
+        <figure class="frame frame--train">
+          <img src="/immagini/magenta/gamba-de-legn.jpg" alt="Gamba de Legn" width="2566" height="1876" loading="lazy">
+          <figcaption>Steam tram «Gamba de Legn» on Corso Vercelli (Milan, 1940s) · Wikimedia Commons · PD-Italy</figcaption>
+        </figure>
+        <p class="block__text" style="margin-top:1.4rem">That line already told Magenta’s story: <em>a gateway to Milan</em>. Today modern trains play that role toward Garibaldi, Centrale and the city centre — while motorway and Malpensa open Magenta to international fairs.</p>
+      </div>
+    </section>
+    <section class="block block--fog" id="ticino">
+      <div class="wrap reveal reveal--scale">
+        <span class="label">Nature</span>
+        <h2 class="title">Ticino Park</h2>
+        <p class="block__text">A few minutes from Magenta begins the <strong>Lombardy Ticino Valley Nature Park</strong>: river, woods, cycle paths and Navigli landscapes. A green break between fair days and the city.</p>
+        <div class="photo-trio stagger">
+          <figure><img src="/immagini/ticino/ticino-valle.jpg" alt="" width="1600" height="900" loading="lazy"><figcaption>Ticino Valley</figcaption></figure>
+          <figure><img src="/immagini/ticino/ticino-riva.jpg" alt="" width="1600" height="1200" loading="lazy"><figcaption>Ticino riverbank</figcaption></figure>
+          <figure><img src="/immagini/ticino/ticino-parco.jpg" alt="" width="900" height="600" loading="lazy"><figcaption>Ticino Park</figcaption></figure>
+        </div>
+      </div>
+    </section>
+    <section class="block" id="annunci-preview">
+      <div class="wrap reveal">
+        <span class="label">Listings</span>
+        <h2 class="title">Where to stay</h2>
+        <p class="block__text">Airbnb-style cards: photos, amenities, house rules, location and booking (AvaiBook coming).</p>
+        <div class="listing-grid">
+          <a class="card-stay" href="/en/strutture/sanchioli-11/">
+            <div class="card-stay__media">
+              <img src="/immagini/sanchioli-11/foto-01.jpg" alt="Sanchioli 11" width="1200" height="900" loading="lazy">
+            </div>
+            <div class="card-stay__meta"><h3>Sanchioli 11</h3><span>Magenta</span></div>
+            <p class="card-stay__sub">Studio · 2 guests · terrace · 15′ Fair · 20′ Malpensa</p>
+            <p class="card-stay__price">Book direct · CIN IT015130C2SMSD6MZG</p>
+          </a>
+        </div>
+        <p style="margin-top:1.6rem"><a class="btn btn-dark" href="/en/strutture/">All listings</a></p>
       </div>
     </section>
   </main>
-
   <footer class="foot">
     <div class="wrap foot__row">
-      <div>Magenta Stay · Italy</div>
-      <div><a href="/">Italiano</a> · <a href="/strutture/">Listings</a></div>
+      <div><strong>Magenta Stay</strong><br>Magenta (MI) · Italy<br>~20 min Malpensa · ~15 min Rho Fiera · trains to Milan</div>
+      <div>
+        <a href="/en/strutture/">Listings</a> ·
+        <span class="lang"><a href="/" hreflang="it">IT</a><a class="is-active" href="/en/" hreflang="en">EN</a><a href="/de/" hreflang="de">DE</a><a href="/fr/" hreflang="fr">FR</a></span> ·
+        <a href="/en/contact/">Contact</a> ·
+        <a href="/en/rho-fiera-accommodation/">B&amp;B and apartments near Rho Fiera</a>
+      </div>
     </div>
   </footer>
   <script src="/js/main.js" defer></script>
+  <script src="/vendor/leaflet/leaflet.js" defer></script>
+  <script src="/js/map.js" defer></script>
 </body>
 </html>
