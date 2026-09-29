@@ -59,20 +59,17 @@ Cartella remota: **`www.magentastay.it`** (non `cgi-bin`).
 **A sinistra (locale):**  
 `/Users/fabio/Documents/Progetti/Siti Web/LocazioneTuristica`
 
-Seleziona e trascina a destra:
+Seleziona e trascina a destra (sovrascrivi):
 - `index.html`
-- `css/`
-- `js/`
-- `immagini/` (importante: le foto)
+- `css/` `js/` `vendor/`
+- `immagini/`
 - `strutture/`
-- `en/`
+- `en/` `de/` `fr/`
 - `contatti/`
 - `fiera-rho-expo/` `malpensa/` `milano/` `parco-ticino/`
 - `robots.txt` `sitemap.xml` `.htaccess`
 
-Sovrascrivi tutto (alcuni file sul server sono vuoti/corrotti).
-
-Poi rinomina sul server: `index.php` → `index.php.bak`.
+Poi, se sul server c’è ancora `index.php`, rinominalo in `index.php.bak`.
 
 ## 3) Verifica
 

@@ -611,3 +611,56 @@ body.lightbox-open { overflow: hidden; }
   cursor: pointer; font-weight: 650; color: var(--ink);
 }
 .faq details p { margin: .55rem 0 0; color: var(--muted); }
+
+
+/* Language switcher in header — always visible */
+.lang--nav {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+  margin-left: 0.35rem;
+  padding: 0.25rem 0.45rem;
+  border: 1px solid rgba(255,255,255,0.45);
+  background: rgba(0,0,0,0.18);
+}
+.top--solid .lang--nav {
+  border-color: rgba(11,28,34,0.2);
+  background: rgba(46,196,214,0.12);
+}
+.top--solid .lang--nav a { color: var(--ink); }
+.lang--nav a {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+  opacity: 0.75;
+  padding: 0.15rem 0.25rem;
+}
+.lang--nav a.is-active,
+.lang--nav a:hover { opacity: 1; color: #fff; }
+.top--solid .lang--nav a.is-active,
+.top--solid .lang--nav a:hover { color: var(--magenta); }
+
+/* Stronger lightbox controls */
+.lightbox__nav {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lightbox__nav:hover { background: var(--magenta); }
+.lightbox__close {
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  border: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  font-size: 1.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+}

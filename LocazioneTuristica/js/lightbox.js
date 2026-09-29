@@ -78,14 +78,22 @@
     imgEl.removeAttribute("src");
   }
 
+  function indexOfHref(href) {
+    var i = images.indexOf(href);
+    if (i >= 0) return i;
+    var file = (href || "").split("/").pop();
+    for (var n = 0; n < images.length; n++) {
+      if ((images[n] || "").split("/").pop() === file) return n;
+    }
+    return 0;
+  }
+
   gallery.addEventListener("click", function (e) {
     var a = e.target.closest("a");
     if (!a || !gallery.contains(a)) return;
     e.preventDefault();
-    var href = a.getAttribute("href");
-    var i = images.indexOf(href);
-    if (i < 0) i = 0;
-    openAt(i);
+    e.stopPropagation();
+    openAt(indexOfHref(a.getAttribute("href")));
   });
 
   modal.addEventListener("click", function (e) {
