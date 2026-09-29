@@ -19,8 +19,8 @@ window.MAGENTA_STAY_LISTINGS = [
     checkOut: "11:00",
     airbnbId: "1780316664494400682",
     airbnbUrl: "https://www.airbnb.it/rooms/1780316664494400682",
-    // Numeric ID from AvaiBook (GET /api/owner/accommodations/). Keep null until known.
-    avaibookPropertyId: null,
+    // AvaiBook ID alloggio
+    avaibookPropertyId: "408300",
     // Optional bookonline.pro embed URL / widget code later
     avaibookEmbed: null,
     highlights: ["~15 min Rho Fiera", "~20 min Malpensa", "Terrace", "Full kitchen"],

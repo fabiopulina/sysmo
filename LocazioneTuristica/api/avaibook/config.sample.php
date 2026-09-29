@@ -19,7 +19,7 @@
 return [
     'env' => 'biz', // biz | com
     'base_url' => 'https://api.avaibook.biz',
-    'token' => 'PASTE_TOKEN_HERE',
-    // Numeric AvaiBook accommodation id for Sanchioli 11
-    'default_accommodation_id' => '',
+    'token' => 'PASTE_TOKEN_HERE', // Codice Token da AvaiBook (solo in config.php, non su GitHub)
+    // ID alloggio Sanchioli 11
+    'default_accommodation_id' => '408300',
 ];
