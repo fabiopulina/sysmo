@@ -583,8 +583,8 @@ body.lightbox-open { overflow: hidden; }
     transform: none;
   }
   .wrap {
-    padding-inline: max(1.5rem, env(safe-area-inset-left, 0px))
-      max(1.5rem, env(safe-area-inset-right, 0px));
+    padding-inline: max(1.75rem, env(safe-area-inset-left, 0px))
+      max(1.75rem, env(safe-area-inset-right, 0px));
   }
 }
 @media (prefers-reduced-motion: reduce) {
