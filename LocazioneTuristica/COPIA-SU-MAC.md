@@ -1,11 +1,9 @@
-# Backup Mac + upload Aruba (da casa)
+# Backup Mac + upload Aruba
 
-Il Cloud Agent / GitHub Actions non può caricare bene su Aruba col filtro IP.
-Flusso: **GitHub → Mac (backup) → FileZilla (IP casa) → Aruba**.
+**Importante:** su Aruba e sul Mac potresti avere ancora una copia **vecchia**.
+Su GitHub ci sono già: **IT / EN / DE / FR** in header + **lightbox** con frecce ◀ ▶.
 
-## 1) Aggiorna la copia sul Mac
-
-Apri **Terminale** e incolla tutto:
+## 1) Aggiorna SEMPRE dal branch GitHub (incolla nel Terminale Mac)
 
 ```bash
 setopt NULL_GLOB
@@ -16,62 +14,34 @@ git clone --branch cursor/locazione-turistica-sanchioli-9e06 --single-branch \
   https://github.com/fabiopulina/sysmo.git /tmp/sysmo-lt
 
 mkdir -p "$DEST"
-# Aggiorna i file del sito; non toccare una eventuale cartella Foto di backup
-rsync -a /tmp/sysmo-lt/LocazioneTuristica/ "$DEST/" \
+rsync -a --delete /tmp/sysmo-lt/LocazioneTuristica/ "$DEST/" \
   --exclude 'Foto/' \
   --exclude '.DS_Store'
 
-# Se hai ancora JPG in Foto/ e vuoi riallineare immagini/sanchioli-11:
-if [ -d "$DEST/Foto" ]; then
-  mkdir -p "$DEST/immagini/sanchioli-11"
-  i=1
-  for f in "$DEST/Foto"/*; do
-    [ -f "$f" ] || continue
-    case "${f:l}" in
-      *.jpg|*.jpeg|*.png|*.webp)
-        printf -v n "%02d" "$i"
-        ext="${f##*.}"; ext="${ext:l}"
-        cp -f "$f" "$DEST/immagini/sanchioli-11/foto-${n}.${ext}"
-        i=$((i+1))
-        ;;
-    esac
-  done
-  echo "Foto allineate: $((i-1))"
-fi
+echo "Verifica lingue + lightbox:"
+ls "$DEST/en" "$DEST/de" "$DEST/fr"
+ls "$DEST/js/lightbox.js"
+rg -n "lang--nav|lightbox.js" "$DEST/index.html" "$DEST/strutture/sanchioli-11/index.html" | head
 
-echo "Backup pronto in: $DEST"
-ls "$DEST"
 open "$DEST"
 ```
 
-## 2) Carica su Aruba (FileZilla, dalla rete di casa)
+`--delete` allinea il Mac a GitHub (non tocca `Foto/`).
 
-| Campo | Valore |
-|--------|--------|
-| Host | `ftp.magentastay.it` |
-| Utente | utente FTP Aruba |
-| Password | password FTP |
-| Porta | `21` |
-| Modalità | passiva |
+## 2) Poi ricarica TUTTO su Aruba (FileZilla)
 
-Cartella remota: **`www.magentastay.it`** (non `cgi-bin`).
+Cartella remota: `www.magentastay.it`
 
-**A sinistra (locale):**  
-`/Users/fabio/Documents/Progetti/Siti Web/LocazioneTuristica`
+Trascina da `$DEST` (sovrascrivi):
+`index.html`, `css/`, `js/` (**incluso lightbox.js**), `immagini/`, `strutture/`, `en/`, `de/`, `fr/`, `contatti/`, `vendor/`, landing, `robots.txt`, `sitemap.xml`, `.htaccess`
 
-Seleziona e trascina a destra (sovrascrivi):
-- `index.html`
-- `css/` `js/` `vendor/`
-- `immagini/`
-- `strutture/`
-- `en/` `de/` `fr/`
-- `contatti/`
-- `fiera-rho-expo/` `malpensa/` `milano/` `parco-ticino/`
-- `robots.txt` `sitemap.xml` `.htaccess`
+## 3) Check sul sito live
 
-Poi, se sul server c’è ancora `index.php`, rinominalo in `index.php.bak`.
+- In alto a destra: **IT EN DE FR**
+- Su Sanchioli 11: click foto → overlay con **frecce** per scorrere
+- Hard refresh: `Cmd+Shift+R`
 
-## 3) Verifica
-
-Apri https://www.magentastay.it  
-Devi vedere **Magenta Stay**, menu **Annunci**, foto visibili, testo **15 min Rho Fiera · 20 min Malpensa**.
+## Attenzione cartella EN
+Su Aruba la home `/en/` era ancora una **landing vecchia** (diversa da IT/DE/FR).
+Dopo lo sync Mac, in FileZilla **cancella** sul server la cartella `en` e ricaricala intera da Mac, oppure sovrascrivi per forza `en/index.html`.
+Verifica che in https://www.magentastay.it/en/ ci siano le sezioni Mappa, Why Magenta, Gamba de Legn, Ticino, Listings (non solo una pagina corta “Why Magenta beats downtown…”).
