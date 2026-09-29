@@ -122,21 +122,17 @@
           <h2 style="font-size:1.35rem">Prenota il soggiorno</h2>
           <p class="muted" style="margin:0 0 .8rem">Calendario sincronizzato · pagamenti sicuri</p>
           <div class="book-slot" id="avaibook-booking"
-               data-avaibook-embed="pending"
                data-listing="sanchioli-11"
+               data-avaibook-id=""
+               data-proxy="/api/avaibook/proxy.php"
                data-airbnb="1780316664494400682">
-            <small>
-              Spazio widget <strong>AvaiBook</strong> (API / booking engine): disponibilità, tariffe e pagamento.
-              Quando hai l’ID struttura e il codice embed, li colleghiamo qui senza cambiare layout.
-            </small>
-            <div class="actions" style="flex-direction:column">
-              <a class="btn btn-primary" href="/contatti/" style="width:100%">Richiedi disponibilità</a>
-              <a class="btn btn-dark" style="width:100%;box-shadow:inset 0 0 0 1px var(--ink);background:transparent;color:var(--ink)"
-                 href="https://www.airbnb.it/rooms/1780316664494400682" rel="noopener noreferrer" target="_blank">Apri su Airbnb</a>
-            </div>
+          </div>
+          <div class="actions" style="flex-direction:column;margin-top:.9rem">
+            <a class="btn btn-dark" style="width:100%;box-shadow:inset 0 0 0 1px var(--ink);background:transparent;color:var(--ink)"
+               href="https://www.airbnb.it/rooms/1780316664494400682" rel="noopener noreferrer" target="_blank">Apri su Airbnb</a>
           </div>
           <p style="margin:.9rem 0 0;font-size:.85rem;color:var(--muted)">
-            Nessuna commissione OTA sul diretto (quando AvaiBook è attivo).
+            Calendario e prezzi da AvaiBook (sincronizzato con Airbnb / Booking quando il channel manager è attivo).
           </p>
         </aside>
       </div>
@@ -153,5 +149,6 @@
   <script src="/js/listings.js" defer></script>
   <script src="/js/main.js" defer></script>
   <script src="/js/lightbox.js" defer></script>
+  <script src="/js/booking.js" defer></script>
 </body>
 </html>

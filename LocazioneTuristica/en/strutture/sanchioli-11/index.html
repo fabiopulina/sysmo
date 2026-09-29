@@ -50,14 +50,15 @@
         <aside class="p-side" id="prenota">
           <h2 style="font-size:1.35rem">Book your stay</h2>
           <p class="muted" style="margin:0 0 .8rem">Synced calendar · secure payments</p>
-          <div class="book-slot">
-            <small>AvaiBook widget space (API / booking engine): availability, rates and payment.</small>
-            <div class="actions" style="flex-direction:column">
-              <a class="btn btn-primary" href="/en/contact/" style="width:100%">Request availability</a>
-              <a class="btn btn-dark" style="width:100%;box-shadow:inset 0 0 0 1px var(--ink);background:transparent;color:var(--ink)" href="https://www.airbnb.it/rooms/1780316664494400682" rel="noopener noreferrer" target="_blank">Open on Airbnb</a>
-            </div>
+                    <div class="book-slot" id="avaibook-booking"
+               data-listing="sanchioli-11"
+               data-avaibook-id=""
+               data-proxy="/api/avaibook/proxy.php">
           </div>
-          <p style="margin:.9rem 0 0;font-size:.85rem;color:var(--muted)">No OTA commission on direct booking (when AvaiBook is live).</p>
+          <div class="actions" style="flex-direction:column;margin-top:.9rem">
+            <a class="btn btn-dark" style="width:100%;box-shadow:inset 0 0 0 1px var(--ink);background:transparent;color:var(--ink)" href="https://www.airbnb.it/rooms/1780316664494400682" rel="noopener noreferrer" target="_blank">Open on Airbnb</a>
+          </div>
+          <p style="margin:.9rem 0 0;font-size:.85rem;color:var(--muted)">AvaiBook calendar &amp; rates.</p>
         </aside>
       </div>
     </div>
@@ -71,5 +72,6 @@
   <script src="/js/listings.js" defer></script>
   <script src="/js/main.js" defer></script>
   <script src="/js/lightbox.js" defer></script>
+  <script src="/js/booking.js" defer></script>
 </body>
 </html>

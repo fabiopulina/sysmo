@@ -45,3 +45,12 @@ Trascina da `$DEST` (sovrascrivi):
 Su Aruba la home `/en/` era ancora una **landing vecchia** (diversa da IT/DE/FR).
 Dopo lo sync Mac, in FileZilla **cancella** sul server la cartella `en` e ricaricala intera da Mac, oppure sovrascrivi per forza `en/index.html`.
 Verifica che in https://www.magentastay.it/en/ ci siano le sezioni Mappa, Why Magenta, Gamba de Legn, Ticino, Listings (non solo una pagina corta “Why Magenta beats downtown…”).
+
+
+## AvaiBook (dopo sync)
+Carica anche `api/` su Aruba, ma **crea `config.php` solo in locale/Mac** (non da GitHub):
+```bash
+cp api/avaibook/config.sample.php api/avaibook/config.php
+# edita token + accommodation id
+```
+Vedi `AVAIBOOK.md`.
