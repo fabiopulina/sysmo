@@ -19,7 +19,7 @@
    Apri `config.php` e inserisci:
    - `token` = API Key
    - `base_url` = `https://api.avaibook.biz`
-   - `default_accommodation_id` = (lo trovi al passo 5)
+   - `default_accommodation_id` = `408300` (ID alloggio Sanchioli 11)
 5. Carica su Aruba (FileZilla) la cartella `api/` (con `config.php`) + `js/booking.js` + pagine struttura aggiornate
 6. Apri nel browser:
    `https://www.magentastay.it/api/avaibook/proxy.php?action=ping`  
