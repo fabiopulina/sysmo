@@ -517,23 +517,28 @@ body.lightbox-open { overflow: hidden; }
 .foot a:hover { text-decoration: underline; }
 .foot__row { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; }
 
-/* Scroll reveals */
+/* Scroll reveals — only vertical motion (never translateX: clips text on phones) */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity .9s var(--ease), transform .9s var(--ease);
 }
 .reveal.on { opacity: 1; transform: none; }
-.reveal--left { transform: translateX(-36px); }
-.reveal--right { transform: translateX(36px); }
+.reveal--left,
+.reveal--right,
+.reveal--scale {
+  transform: translateY(28px);
+}
 .reveal--left.on,
 .reveal--right.on,
+.reveal--scale.on,
 .reveal.on.reveal--left,
 .reveal.on.reveal--right,
+.reveal.on.reveal--scale,
 .reveal.on .reveal--left,
-.reveal.on .reveal--right { transform: none; }
-.reveal--scale { transform: translateY(24px) scale(.96); }
-.reveal--scale.on { transform: none; }
+.reveal.on .reveal--right {
+  transform: none;
+}
 
 .reveal .stagger > * {
   opacity: 0;
@@ -569,23 +574,11 @@ body.lightbox-open { overflow: hidden; }
   }
   .nav.open { display: flex; }
   .times, .story, .amenity-grid { grid-template-columns: 1fr; }
-  /* Avoid horizontal slide reveals clipping text on narrow phones */
-  .reveal--left,
-  .reveal--right {
-    transform: translateY(28px);
-  }
-  .reveal--left.on,
-  .reveal--right.on,
-  .reveal.on.reveal--left,
-  .reveal.on.reveal--right,
-  .reveal.on .reveal--left,
-  .reveal.on .reveal--right {
-    transform: none;
-  }
   .wrap {
     padding-inline: max(1.75rem, env(safe-area-inset-left, 0px))
       max(1.75rem, env(safe-area-inset-right, 0px));
   }
+  .split > * { min-width: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
