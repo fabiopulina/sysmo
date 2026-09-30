@@ -5,33 +5,31 @@
 - UI prenotazione sull’annuncio: `js/booking.js` (date → disponibilità + prezzo)
 - Config di esempio: `api/avaibook/config.sample.php`
 
-## Passi per te (pre-produzione .biz)
+## Passi per te (produzione .com)
 
-1. Controlla l’email AvaiBook: password per `fabio.pulina@outlook.com`
-2. Login: https://app.avaibook.biz/login.php
-3. Apri il token: https://app.avaibook.biz/herramientas_api_rest_datos.php  
-   Copia l’**API Key / X-AUTH-TOKEN**
-4. Sul Mac, nella cartella del sito:
+1. Login: https://app.avaibook.com/login.php
+2. Apri **Configurazione API** e clicca l’icona **Copia** sul token della chiave `owner`
+   (NON incollare il token in chat / GitHub)
+3. Sul Mac, nella cartella del sito:
    ```bash
    cd "/Users/fabio/Documents/Progetti/Siti Web/LocazioneTuristica"
    cp api/avaibook/config.sample.php api/avaibook/config.php
    ```
    Apri `config.php` e inserisci:
-   - `token` = API Key
-   - `base_url` = `https://api.avaibook.biz`
+   - `token` = valore copiato (chiave owner)
+   - `env` = `com`
+   - `base_url` = `https://api.avaibook.com`
    - `default_accommodation_id` = `408300` (ID alloggio Sanchioli 11)
-5. Carica su Aruba (FileZilla) la cartella `api/` (con `config.php`) + `js/booking.js` + pagine struttura aggiornate
-6. Apri nel browser:
+4. Carica su Aruba (FileZilla) la cartella `api/` (con `config.php`) + `js/booking.js` + pagine struttura aggiornate
+5. Apri nel browser:
    `https://www.magentastay.it/api/avaibook/proxy.php?action=ping`  
    → deve rispondere `ok: true`
-7. Elenco strutture AvaiBook:
-   `https://www.magentastay.it/api/avaibook/proxy.php?action=accommodations`  
-   → copia l’`id` numerico di Sanchioli 11
-8. Metti quell’id in:
-   - `api/avaibook/config.php` → `default_accommodation_id`
-   - e/o `js/listings.js` → `avaibookPropertyId`
-   - e/o `data-avaibook-property-id` / `data-avaibook-id` nella pagina struttura
-9. Ricarica `https://www.magentastay.it/strutture/sanchioli-11/` e prova check-in/out
+6. Controllo strutture:
+   `https://www.magentastay.it/api/avaibook/proxy.php?action=accommodations`
+7. Ricarica `https://www.magentastay.it/strutture/sanchioli-11/` e prova check-in/out
+
+### Pre-produzione (.biz) — solo se AvaiBook te lo chiede per i test
+Login: https://app.avaibook.biz/login.php · base: `https://api.avaibook.biz` · `env` => `biz`
 
 ## Endpoint usati
 Auth header: `X-AUTH-TOKEN`

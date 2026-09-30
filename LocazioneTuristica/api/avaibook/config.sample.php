@@ -17,9 +17,10 @@
  *   GET /api/owner/accommodations/  (via proxy?action=accommodations)
  */
 return [
-    'env' => 'biz', // biz | com
-    'base_url' => 'https://api.avaibook.biz',
-    'token' => 'PASTE_TOKEN_HERE', // Codice Token da AvaiBook (solo in config.php, non su GitHub)
+    // Produzione (.com) — come nella schermata Configurazione API AvaiBook
+    'env' => 'com', // biz | com
+    'base_url' => 'https://api.avaibook.com',
+    'token' => 'PASTE_TOKEN_HERE', // clicca l’icona Copia sulla chiave "owner" (non incollarlo in chat)
     // ID alloggio Sanchioli 11
     'default_accommodation_id' => '408300',
 ];
