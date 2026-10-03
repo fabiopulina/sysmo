@@ -30,8 +30,6 @@
     return out;
   }
 
-  var GRID_PREVIEW = 6;
-
   function thumbSrc(full, w) {
     w = w || 640;
     var path = (full || "").replace(/^\//, "");
@@ -96,10 +94,36 @@
     });
   }
 
+  function revealTiles() {
+    var tiles = gallery.querySelectorAll("a.tile-reveal");
+    var reduce =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!tiles.length) return;
+    if (!("IntersectionObserver" in window) || reduce) {
+      Array.prototype.forEach.call(tiles, function (t) {
+        t.classList.add("is-in");
+      });
+      return;
+    }
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("is-in");
+          io.unobserve(e.target);
+        });
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -10% 0px" }
+    );
+    Array.prototype.forEach.call(tiles, function (t) {
+      io.observe(t);
+    });
+  }
+
   function renderGrid(list) {
-    var preview = list.slice(0, Math.min(GRID_PREVIEW, list.length));
-    gallery.classList.toggle("p-hero-grid--many", preview.length > 5);
-    gallery.innerHTML = preview
+    gallery.classList.toggle("p-hero-grid--many", list.length > 5);
+    gallery.innerHTML = list
       .map(function (src, i) {
         var alt = i === 0 ? "Copertina alloggio" : "Sanchioli 11 · foto " + pad2(i);
         var extra =
@@ -107,7 +131,7 @@
             ? ' fetchpriority="high" decoding="async"'
             : ' loading="lazy" decoding="async"';
         return (
-          '<a href="' +
+          '<a class="tile-reveal" href="' +
           src +
           '"><img src="' +
           thumbSrc(src, 640) +
@@ -121,33 +145,13 @@
         );
       })
       .join("");
-    var more = document.getElementById("gallery-more");
-    if (!more) {
-      more = document.createElement("p");
-      more.id = "gallery-more";
-      more.className = "gallery-more";
-      gallery.insertAdjacentElement("afterend", more);
-    }
-    if (list.length > preview.length) {
-      more.hidden = false;
-      more.innerHTML =
-        '<button type="button" class="btn btn-ghost" id="gallery-open-all"></button>';
-      var btn = more.querySelector("#gallery-open-all");
-      var labels = {
-        it: "Vedi tutte le " + list.length + " foto",
-        en: "See all " + list.length + " photos",
-        de: "Alle " + list.length + " Fotos ansehen",
-        fr: "Voir les " + list.length + " photos",
-      };
-      btn.textContent = labels[lang] || labels.it;
-    } else {
-      more.hidden = true;
-      more.innerHTML = "";
-    }
+    var leftover = document.getElementById("gallery-more");
+    if (leftover) leftover.remove();
     if (hint) {
       var tpl = hintTpl[lang] || hintTpl.it;
       hint.textContent = tpl.replace("{n}", String(list.length));
     }
+    revealTiles();
   }
 
   function bindLightbox(list) {
@@ -232,16 +236,6 @@
     nextBtn.addEventListener("click", function () {
       show(index + 1);
     });
-
-    var moreBtnHost = document.getElementById("gallery-more");
-    if (moreBtnHost) {
-      moreBtnHost.addEventListener("click", function (e) {
-        var b = e.target.closest("#gallery-open-all");
-        if (!b) return;
-        e.preventDefault();
-        openAt(0);
-      });
-    }
 
     document.addEventListener("keydown", function (e) {
       if (modal.hidden) return;
