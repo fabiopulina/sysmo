@@ -15,6 +15,9 @@ RSYNC_EXCLUDES=(
   --exclude 'api/avaibook/config.php'
   --exclude 'Foto/'
   --exclude 'foto/'
+  --exclude 'immagini/sanchioli-11/*.jpg'
+  --exclude 'immagini/sanchioli-11/*.jpeg'
+  --exclude 'immagini/sanchioli-11/_backup*'
   --exclude '.DS_Store'
 )
 

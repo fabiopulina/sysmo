@@ -9,6 +9,10 @@ Le landing SEO (Fiera / Malpensa / …) restano per Google, non nel menu.
 ## Messaggio chiave
 **15 min Rho Fiera · 20 min Malpensa** — anche in inglese (`/en/`) per ospiti esteri.
 
+## Foto Sanchioli 11
+JPEG in `immagini/sanchioli-11/` (`foto-00.jpg` copertina … `foto-20.jpg`) **non stanno su GitHub**.
+Master sul Mac → upload FTP Aruba. Il codice elenca tutte e 21 le foto; oltre `foto-20` la gallery le trova da sola.
+
 ## Deploy GitHub → Aruba FTP
 Workflow: `.github/workflows/deploy-aruba-ftp.yml`
 
@@ -24,4 +28,5 @@ Aggiungi in GitHub → Settings → Secrets and variables → Actions:
 Poi: Actions → “Deploy Magenta Stay to Aruba FTP” → Run workflow  
 oppure push su questo branch.
 
-Il Mac resta solo backup: non serve più caricare a mano da Finder.
+Il workflow **non** carica le JPEG dell’appartamento (restano quelle del Mac/FTP).
+Le foto storiche di Magenta/Ticino restano nel repo.
