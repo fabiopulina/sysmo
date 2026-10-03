@@ -110,11 +110,20 @@
       function (entries) {
         entries.forEach(function (e) {
           if (!e.isIntersecting) return;
-          e.target.classList.add("is-in");
-          io.unobserve(e.target);
+          var tile = e.target;
+          var i = Array.prototype.indexOf.call(tiles, tile);
+          var delay = (i % 3) * 70;
+          if (delay) {
+            setTimeout(function () {
+              tile.classList.add("is-in");
+            }, delay);
+          } else {
+            tile.classList.add("is-in");
+          }
+          io.unobserve(tile);
         });
       },
-      { threshold: 0.14, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.02, rootMargin: "0px 0px -8% 0px" }
     );
     Array.prototype.forEach.call(tiles, function (t) {
       io.observe(t);
