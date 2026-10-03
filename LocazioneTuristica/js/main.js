@@ -1,4 +1,25 @@
 (function () {
+  function originalFromThumb(src) {
+    var m = (src || "").match(/[?&]src=([^&]+)/);
+    if (!m) return "";
+    try {
+      return "/" + decodeURIComponent(m[1]).replace(/^\//, "");
+    } catch (e) {
+      return "";
+    }
+  }
+  document.querySelectorAll('img[src*="thumb.php"]').forEach(function (img) {
+    var orig = originalFromThumb(img.getAttribute("src") || "");
+    if (!orig) return;
+    function useOriginal() {
+      if (img.dataset.thumbFallback) return;
+      img.dataset.thumbFallback = "1";
+      img.src = orig;
+    }
+    img.addEventListener("error", useOriginal);
+    if (img.complete && img.naturalWidth === 0) useOriginal();
+  });
+
   var btn = document.querySelector(".menu-btn");
   var nav = document.querySelector(".nav");
   if (btn && nav) {
