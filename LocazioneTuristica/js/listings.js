@@ -17,8 +17,8 @@ window.MAGENTA_STAY_LISTINGS = [
     propertyType: "Entire home / studio",
     checkIn: "15:00",
     checkOut: "11:00",
-    airbnbId: "1780316664494400682",
-    airbnbUrl: "https://www.airbnb.it/rooms/1780316664494400682",
+    airbnbId: null,
+    airbnbUrl: null,
     // AvaiBook ID alloggio
     avaibookPropertyId: "408300",
     // Optional bookonline.pro embed URL / widget code later

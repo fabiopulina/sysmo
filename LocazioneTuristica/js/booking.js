@@ -40,6 +40,8 @@
       offline: "Calendario AvaiBook non ancora configurato sul server (manca token o ID struttura).",
       error: "Impossibile contattare AvaiBook. Riprova più tardi.",
       needDates: "Seleziona check-in e check-out.",
+      request: "Richiedi prenotazione diretta",
+      directHint: "Prenotazione diretta con l’host — senza intermediazione.",
     },
     en: {
       title: "Check availability",
@@ -56,6 +58,8 @@
       offline: "AvaiBook calendar not configured yet (missing token or property id on server).",
       error: "Could not reach AvaiBook. Please try again later.",
       needDates: "Select check-in and check-out.",
+      request: "Request direct booking",
+      directHint: "Direct booking with the host — no middleman.",
     },
     de: {
       title: "Verfügbarkeit prüfen",
@@ -72,6 +76,8 @@
       offline: "AvaiBook noch nicht konfiguriert (Token oder Unterkunfts-ID fehlt).",
       error: "AvaiBook nicht erreichbar. Bitte später erneut versuchen.",
       needDates: "Bitte Check-in und Check-out wählen.",
+      request: "Direktbuchung anfragen",
+      directHint: "Direktbuchung beim Host — ohne Zwischenhändler.",
     },
     fr: {
       title: "Vérifier les disponibilités",
@@ -88,6 +94,8 @@
       offline: "Calendrier AvaiBook non configuré (token ou ID manquant).",
       error: "Impossible de joindre AvaiBook. Réessayez plus tard.",
       needDates: "Sélectionnez arrivée et départ.",
+      request: "Demander une réservation directe",
+      directHint: "Réservation directe avec l’hôte — sans intermédiaire.",
     },
   };
   var t = i18n[lang] || i18n.it;
@@ -256,8 +264,19 @@
           }
         }
         html +=
+          '<p class="muted" style="margin:.7rem 0 0">' +
+          t.directHint +
+          "</p>" +
           '<div class="actions" style="margin-top:.8rem">' +
-          '<a class="btn btn-dark" href="/contatti/">Contatti / Contact</a>' +
+          '<a class="btn btn-primary" href="/contatti/?checkin=' +
+          encodeURIComponent(cin) +
+          "&checkout=" +
+          encodeURIComponent(cout) +
+          "&guests=" +
+          encodeURIComponent(guests) +
+          '">' +
+          t.request +
+          "</a>" +
           "</div>";
         result.innerHTML = html;
       })
