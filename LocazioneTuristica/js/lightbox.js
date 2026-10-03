@@ -30,6 +30,14 @@
     return out;
   }
 
+  var GRID_PREVIEW = 6;
+
+  function thumbSrc(full, w) {
+    w = w || 640;
+    var path = (full || "").replace(/^\//, "");
+    return "/api/thumb.php?src=" + encodeURIComponent(path) + "&w=" + w;
+  }
+
   function coverFirst(list) {
     var cover = "/immagini/sanchioli-11/foto-00.jpg";
     var rest = list.filter(function (u) {
@@ -89,24 +97,53 @@
   }
 
   function renderGrid(list) {
-    gallery.classList.toggle("p-hero-grid--many", list.length > 5);
-    gallery.innerHTML = list
+    var preview = list.slice(0, Math.min(GRID_PREVIEW, list.length));
+    gallery.classList.toggle("p-hero-grid--many", preview.length > 5);
+    gallery.innerHTML = preview
       .map(function (src, i) {
         var alt = i === 0 ? "Copertina alloggio" : "Sanchioli 11 · foto " + pad2(i);
-        var extra = i === 0 ? ' fetchpriority="high"' : ' loading="lazy"';
+        var extra =
+          i === 0
+            ? ' fetchpriority="high" decoding="async"'
+            : ' loading="lazy" decoding="async"';
         return (
           '<a href="' +
           src +
           '"><img src="' +
-          src +
+          thumbSrc(src, 640) +
           '" alt="' +
           alt +
-          '" width="1200" height="900"' +
+          '" width="640" height="480"' +
           extra +
-          "></a>"
+          ' onerror="this.onerror=null;this.src=\'' +
+          src +
+          '\';"></a>'
         );
       })
       .join("");
+    var more = document.getElementById("gallery-more");
+    if (!more) {
+      more = document.createElement("p");
+      more.id = "gallery-more";
+      more.className = "gallery-more";
+      gallery.insertAdjacentElement("afterend", more);
+    }
+    if (list.length > preview.length) {
+      more.hidden = false;
+      more.innerHTML =
+        '<button type="button" class="btn btn-ghost" id="gallery-open-all"></button>';
+      var btn = more.querySelector("#gallery-open-all");
+      var labels = {
+        it: "Vedi tutte le " + list.length + " foto",
+        en: "See all " + list.length + " photos",
+        de: "Alle " + list.length + " Fotos ansehen",
+        fr: "Voir les " + list.length + " photos",
+      };
+      btn.textContent = labels[lang] || labels.it;
+    } else {
+      more.hidden = true;
+      more.innerHTML = "";
+    }
     if (hint) {
       var tpl = hintTpl[lang] || hintTpl.it;
       hint.textContent = tpl.replace("{n}", String(list.length));
@@ -146,7 +183,11 @@
 
     function show(i) {
       index = (i + images.length) % images.length;
-      imgEl.src = images[index];
+      imgEl.src = thumbSrc(images[index], 1400);
+      imgEl.onerror = function () {
+        imgEl.onerror = null;
+        imgEl.src = images[index];
+      };
       imgEl.alt = alts[index] || "Photo " + (index + 1);
       capEl.textContent = index + 1 + " / " + images.length;
     }
@@ -192,6 +233,16 @@
       show(index + 1);
     });
 
+    var moreBtnHost = document.getElementById("gallery-more");
+    if (moreBtnHost) {
+      moreBtnHost.addEventListener("click", function (e) {
+        var b = e.target.closest("#gallery-open-all");
+        if (!b) return;
+        e.preventDefault();
+        openAt(0);
+      });
+    }
+
     document.addEventListener("keydown", function (e) {
       if (modal.hidden) return;
       if (e.key === "Escape") close();
@@ -200,27 +251,10 @@
     });
   }
 
-  probeFolder("/immagini/sanchioli-11/", 0, 80, function (probed) {
-    var all = coverFirst(uniqueKeepOrder(probed.length ? probed : images));
+  function finish(all) {
+    all = coverFirst(uniqueKeepOrder(all));
     if (!all.length) return;
-    var existing = [];
-    Array.prototype.forEach.call(gallery.querySelectorAll("a[href]"), function (a) {
-      existing.push(a.getAttribute("href"));
-    });
-    var same =
-      existing.length === all.length &&
-      existing.every(function (u, i) {
-        return u === all[i];
-      });
-    if (same) {
-      gallery.classList.toggle("p-hero-grid--many", all.length > 5);
-      if (hint) {
-        var tpl = hintTpl[lang] || hintTpl.it;
-        hint.textContent = tpl.replace("{n}", String(all.length));
-      }
-    } else {
-      renderGrid(all);
-    }
+    renderGrid(all);
     bindLightbox(all);
     if (window.MAGENTA_STAY_LISTINGS) {
       var rec = window.MAGENTA_STAY_LISTINGS.find(function (l) {
@@ -231,5 +265,13 @@
         rec.images = all;
       }
     }
-  });
+  }
+
+  if (images.length) {
+    finish(images);
+  } else {
+    probeFolder("/immagini/sanchioli-11/", 0, 80, function (probed) {
+      finish(probed);
+    });
+  }
 })();
