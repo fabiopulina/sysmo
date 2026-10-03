@@ -283,7 +283,7 @@ p { margin: 0 0 1em; }
 .story h3 { font-size: 1.35rem; }
 .story p { margin: 0; color: var(--muted); font-size: .98rem; }
 
-/* Listings Airbnb-like */
+/* Listings cards */
 .listing-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.4rem; margin-top: 1.6rem;
@@ -315,7 +315,7 @@ p { margin: 0 0 1em; }
 .card-stay__sub { margin: 0; color: var(--muted); font-size: .92rem; }
 .card-stay__price { margin: .15rem 0 0; font-weight: 650; color: var(--teal-deep, var(--azure-deep)); }
 
-/* Property page Airbnb-like */
+/* Property page layout */
 .p-hero-grid {
   display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 220px 220px;
   gap: .45rem; margin-top: 1rem; border-radius: 16px; overflow: hidden;
