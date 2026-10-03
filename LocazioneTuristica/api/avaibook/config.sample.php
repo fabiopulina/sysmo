@@ -23,4 +23,7 @@ return [
     'token' => 'PASTE_TOKEN_HERE', // clicca l’icona Copia sulla chiave "owner" (non incollarlo in chat)
     // ID alloggio Sanchioli 11
     'default_accommodation_id' => '408300',
+    // Link motore prenotazioni (Booking engine → Pubblicare sul mio sito → Link web)
+    // Esempio: https://....  — apre la prenotazione diretta in AvaiBook (non WhatsApp)
+    'booking_engine_url' => '',
 ];

@@ -23,6 +23,23 @@
 
   var proxy = root.getAttribute("data-proxy") || "/api/avaibook/proxy.php";
   var lang = (document.documentElement.lang || "it").slice(0, 2);
+  var engineUrl =
+    root.getAttribute("data-booking-engine") ||
+    document.body.getAttribute("data-booking-engine") ||
+    "";
+
+  if (
+    !engineUrl &&
+    listingId &&
+    window.MAGENTA_STAY_LISTINGS
+  ) {
+    var listingEngine = window.MAGENTA_STAY_LISTINGS.find(function (l) {
+      return l.id === listingId;
+    });
+    if (listingEngine && listingEngine.avaibookEmbed) {
+      engineUrl = String(listingEngine.avaibookEmbed);
+    }
+  }
 
   var i18n = {
     it: {
@@ -40,8 +57,10 @@
       offline: "Calendario AvaiBook non ancora configurato sul server (manca token o ID struttura).",
       error: "Impossibile contattare AvaiBook. Riprova più tardi.",
       needDates: "Seleziona check-in e check-out.",
-      request: "Richiedi prenotazione diretta",
-      directHint: "Prenotazione diretta con l’host — senza intermediazione.",
+      request: "Prenota ora",
+      requestUnavailable: "Richiedi altre date",
+      directHint: "Prenotazione diretta su AvaiBook — arriva nel tuo channel, senza WhatsApp.",
+      engineMissing: "Motore prenotazioni AvaiBook non ancora collegato. In config.php imposta booking_engine_url.",
     },
     en: {
       title: "Check availability",
@@ -58,8 +77,10 @@
       offline: "AvaiBook calendar not configured yet (missing token or property id on server).",
       error: "Could not reach AvaiBook. Please try again later.",
       needDates: "Select check-in and check-out.",
-      request: "Request direct booking",
-      directHint: "Direct booking with the host — no middleman.",
+      request: "Book now",
+      requestUnavailable: "Request other dates",
+      directHint: "Direct booking via AvaiBook — goes to your channel, not WhatsApp.",
+      engineMissing: "AvaiBook booking engine URL not set yet (booking_engine_url in config.php).",
     },
     de: {
       title: "Verfügbarkeit prüfen",
@@ -76,8 +97,10 @@
       offline: "AvaiBook noch nicht konfiguriert (Token oder Unterkunfts-ID fehlt).",
       error: "AvaiBook nicht erreichbar. Bitte später erneut versuchen.",
       needDates: "Bitte Check-in und Check-out wählen.",
-      request: "Direktbuchung anfragen",
-      directHint: "Direktbuchung beim Host — ohne Zwischenhändler.",
+      request: "Jetzt buchen",
+      requestUnavailable: "Andere Daten anfragen",
+      directHint: "Direktbuchung über AvaiBook — landet in Ihrem Channel, nicht WhatsApp.",
+      engineMissing: "AvaiBook Booking-Engine-URL fehlt noch (booking_engine_url in config.php).",
     },
     fr: {
       title: "Vérifier les disponibilités",
@@ -94,11 +117,38 @@
       offline: "Calendrier AvaiBook non configuré (token ou ID manquant).",
       error: "Impossible de joindre AvaiBook. Réessayez plus tard.",
       needDates: "Sélectionnez arrivée et départ.",
-      request: "Demander une réservation directe",
-      directHint: "Réservation directe avec l’hôte — sans intermédiaire.",
+      request: "Réserver maintenant",
+      requestUnavailable: "Demander d’autres dates",
+      directHint: "Réservation directe via AvaiBook — arrive dans votre channel, pas WhatsApp.",
+      engineMissing: "URL du moteur AvaiBook manquante (booking_engine_url dans config.php).",
     },
   };
   var t = i18n[lang] || i18n.it;
+
+  function buildEngineHref(cin, cout, guests) {
+    if (!engineUrl) return "";
+    try {
+      var u = new URL(engineUrl, window.location.origin);
+      if (cin) {
+        u.searchParams.set("arrival", cin);
+        u.searchParams.set("checkin", cin);
+        u.searchParams.set("checkinDate", cin);
+      }
+      if (cout) {
+        u.searchParams.set("departure", cout);
+        u.searchParams.set("checkout", cout);
+        u.searchParams.set("checkoutDate", cout);
+      }
+      if (guests) {
+        u.searchParams.set("occupancy", guests);
+        u.searchParams.set("travelers", guests);
+        u.searchParams.set("guests", guests);
+      }
+      return u.toString();
+    } catch (err) {
+      return engineUrl;
+    }
+  }
 
   root.innerHTML =
     '<div class="ab-box">' +

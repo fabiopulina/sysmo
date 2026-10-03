@@ -125,6 +125,9 @@ switch ($action) {
             'base_url' => $base,
             'default_accommodation_id' => $defaultAcc,
             'has_token' => true,
+            'booking_engine_url' => isset($config['booking_engine_url'])
+                ? trim((string) $config['booking_engine_url'])
+                : '',
         ]);
         break;
 

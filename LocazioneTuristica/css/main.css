@@ -320,8 +320,14 @@ p { margin: 0 0 1em; }
   display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 220px 220px;
   gap: .45rem; margin-top: 1rem; border-radius: 16px; overflow: hidden;
 }
+.p-hero-grid--many {
+  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-auto-rows: 150px;
+  grid-template-rows: none;
+}
 .p-hero-grid a { overflow: hidden; background: #cfeef4; }
 .p-hero-grid a:first-child { grid-row: span 2; }
+.p-hero-grid--many a:first-child { min-height: 300px; }
 .p-hero-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
 .p-hero-grid a:hover img { transform: scale(1.04); }
 
@@ -563,7 +569,9 @@ body.lightbox-open { overflow: hidden; }
   .story article:nth-child(odd) { border-right: 0; padding-right: 0; }
   .p-side { position: static; }
   .p-hero-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 140px 140px; }
+  .p-hero-grid--many { grid-template-columns: 1fr 1fr; grid-auto-rows: 140px; grid-template-rows: none; }
   .p-hero-grid a:first-child { grid-column: span 2; grid-row: auto; min-height: 220px; }
+  .p-hero-grid--many a:first-child { min-height: 220px; }
 }
 @media (max-width: 700px) {
   .menu-btn { display: inline-flex; }
