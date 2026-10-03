@@ -125,6 +125,14 @@
   };
   var t = i18n[lang] || i18n.it;
 
+  var contactPaths = {
+    it: "/contatti/",
+    en: "/en/contact/",
+    de: "/de/kontakt/",
+    fr: "/fr/contact/",
+  };
+  var contactPath = contactPaths[lang] || contactPaths.it;
+
   function buildEngineHref(cin, cout, guests) {
     if (!engineUrl) return "";
     try {
@@ -326,7 +334,9 @@
           '<a class="btn btn-primary" ' +
           (bookHref
             ? 'href="' + bookHref + '" target="_blank" rel="noopener noreferrer"'
-            : 'href="/contatti/?checkin=' +
+            : 'href="' +
+              contactPath +
+              "?checkin=" +
               encodeURIComponent(cin) +
               "&checkout=" +
               encodeURIComponent(cout) +
