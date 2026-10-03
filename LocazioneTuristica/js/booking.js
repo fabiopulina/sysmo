@@ -215,6 +215,9 @@
         hint.textContent = t.offline;
         return;
       }
+      if (!engineUrl && res.body.booking_engine_url) {
+        engineUrl = String(res.body.booking_engine_url);
+      }
       if (!accId && res.body.default_accommodation_id) {
         accId = String(res.body.default_accommodation_id);
       }
@@ -313,21 +316,30 @@
             }
           }
         }
+        var bookHref = buildEngineHref(cin, cout, guests);
+        var bookLabel = code === 1 || code === "1" || code === 2 || code === "2" ? t.request : t.requestUnavailable;
         html +=
           '<p class="muted" style="margin:.7rem 0 0">' +
           t.directHint +
           "</p>" +
           '<div class="actions" style="margin-top:.8rem">' +
-          '<a class="btn btn-primary" href="/contatti/?checkin=' +
-          encodeURIComponent(cin) +
-          "&checkout=" +
-          encodeURIComponent(cout) +
-          "&guests=" +
-          encodeURIComponent(guests) +
-          '">' +
-          t.request +
+          '<a class="btn btn-primary" ' +
+          (bookHref
+            ? 'href="' + bookHref + '" target="_blank" rel="noopener noreferrer"'
+            : 'href="/contatti/?checkin=' +
+              encodeURIComponent(cin) +
+              "&checkout=" +
+              encodeURIComponent(cout) +
+              "&guests=" +
+              encodeURIComponent(guests) +
+              '"') +
+          ">" +
+          bookLabel +
           "</a>" +
           "</div>";
+        if (!bookHref) {
+          html += '<p class="muted" style="margin:.5rem 0 0">' + t.engineMissing + "</p>";
+        }
         result.innerHTML = html;
       })
       .catch(function () {
