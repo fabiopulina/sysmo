@@ -20,9 +20,9 @@ window.MAGENTA_STAY_LISTINGS = [
     avaibookPropertyId: "408300",
     avaibookEmbed: null,
     highlights: ["~15 min Rho Fiera", "~20 min Malpensa", "Terrace", "Full kitchen"],
-    cover: "/immagini/sanchioli-11/foto-01.jpg",
+    cover: "/immagini/sanchioli-11/foto-00.jpg",
     images: [
-      "/immagini/sanchioli-11/foto-01.jpg",
+      "/immagini/sanchioli-11/foto-00.jpg",
       "/immagini/sanchioli-11/foto-02.jpg",
       "/immagini/sanchioli-11/foto-03.jpg",
       "/immagini/sanchioli-11/foto-04.jpg",

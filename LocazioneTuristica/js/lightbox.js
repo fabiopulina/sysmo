@@ -31,11 +31,11 @@
   }
 
   function coverFirst(list) {
-    var cover = "/immagini/sanchioli-11/foto-01.jpg";
+    var cover = "/immagini/sanchioli-11/foto-00.jpg";
     var rest = list.filter(function (u) {
-      return u.indexOf("foto-01.") === -1;
+      return u.indexOf("foto-00.") === -1;
     });
-    if (list.some(function (u) { return u.indexOf("foto-01.") !== -1; })) {
+    if (list.some(function (u) { return u.indexOf("foto-00.") !== -1; })) {
       return [cover].concat(rest);
     }
     return list;
@@ -201,7 +201,7 @@
     });
   }
 
-  probeFolder("/immagini/sanchioli-11/", 1, 80, function (probed) {
+  probeFolder("/immagini/sanchioli-11/", 0, 80, function (probed) {
     var all = coverFirst(uniqueKeepOrder(probed.length ? probed : images));
     if (!all.length) return;
     renderGrid(all);
@@ -211,7 +211,7 @@
         return l.id === listingId;
       });
       if (rec) {
-        rec.cover = "/immagini/sanchioli-11/foto-01.jpg";
+        rec.cover = "/immagini/sanchioli-11/foto-00.jpg";
         rec.images = all;
       }
     }
