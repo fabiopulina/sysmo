@@ -21,22 +21,9 @@ window.MAGENTA_STAY_LISTINGS = [
     avaibookEmbed: null,
     highlights: ["~15 min Rho Fiera", "~20 min Malpensa", "Terrace", "Full kitchen"],
     cover: "/immagini/sanchioli-11/foto-00.jpg",
+    // Gallery is discovered at runtime (foto-00 cover + foto-01…); list here is fallback only
     images: [
-      "/immagini/sanchioli-11/foto-00.jpg",
-      "/immagini/sanchioli-11/foto-02.jpg",
-      "/immagini/sanchioli-11/foto-03.jpg",
-      "/immagini/sanchioli-11/foto-04.jpg",
-      "/immagini/sanchioli-11/foto-05.jpg",
-      "/immagini/sanchioli-11/foto-06.jpg",
-      "/immagini/sanchioli-11/foto-07.jpg",
-      "/immagini/sanchioli-11/foto-08.jpg",
-      "/immagini/sanchioli-11/foto-09.jpg",
-      "/immagini/sanchioli-11/foto-10.jpg",
-      "/immagini/sanchioli-11/foto-11.jpg",
-      "/immagini/sanchioli-11/foto-12.jpg",
-      "/immagini/sanchioli-11/foto-13.jpg",
-      "/immagini/sanchioli-11/foto-14.jpg",
-      "/immagini/sanchioli-11/foto-15.jpg"
+      "/immagini/sanchioli-11/foto-00.jpg"
     ],
     descriptionIt:
       "Raffinato monolocale di recente costruzione in contesto signorile a Magenta, a 15 min da Rho Fiera.",
