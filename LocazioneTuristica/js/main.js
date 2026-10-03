@@ -1,21 +1,41 @@
 (function () {
   var btn = document.querySelector(".menu-btn");
   var nav = document.querySelector(".nav");
-  // On the listing page, IT/EN/DE/FR must stay on Sanchioli 11 (not home).
+  if (btn && nav) {
+    btn.addEventListener("click", function () {
+      var open = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+
+  // Listing: IT/EN/DE/FR stay on Sanchioli 11 (index.html bypasses stale 301 to home).
   (function () {
-    var path = (location.pathname || "").replace(/\/+$/, "") + "/";
+    var path = (location.pathname || "") + (location.search || "");
     if (path.indexOf("sanchioli-11") === -1) return;
     var map = {
-      it: "/strutture/sanchioli-11/",
-      en: "/en/strutture/sanchioli-11/",
-      de: "/de/strutture/sanchioli-11/",
-      fr: "/fr/strutture/sanchioli-11/",
+      it: "https://www.magentastay.it/strutture/sanchioli-11/index.html",
+      en: "https://www.magentastay.it/en/strutture/sanchioli-11/index.html",
+      de: "https://www.magentastay.it/de/strutture/sanchioli-11/index.html",
+      fr: "https://www.magentastay.it/fr/strutture/sanchioli-11/index.html",
     };
     document.querySelectorAll(".lang a[hreflang]").forEach(function (a) {
       var code = (a.getAttribute("hreflang") || "").slice(0, 2);
       if (map[code]) a.setAttribute("href", map[code]);
     });
+    document.addEventListener(
+      "click",
+      function (e) {
+        var a = e.target.closest ? e.target.closest(".lang a[hreflang]") : null;
+        if (!a) return;
+        var code = (a.getAttribute("hreflang") || "").slice(0, 2);
+        if (!map[code]) return;
+        e.preventDefault();
+        window.location.assign(map[code]);
+      },
+      true
+    );
   })();
+
   var barHost = document.createElement("div");
   barHost.className = "scroll-progress";
   barHost.setAttribute("aria-hidden", "true");

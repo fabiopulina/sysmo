@@ -2,6 +2,16 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # HTTPS prima dello slash delle cartelle (altrimenti DE/FR fanno 301 verso http e alcuni browser vanno in home)
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://www.magentastay.it%{REQUEST_URI} [R=301,L]
+
+  # Slash finale su HTTPS, non HTTP
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.+)$ https://www.magentastay.it/$1/ [R=301,L]
+
   # SEO keyword aliases -> landing Fiera Rho (B&B / appartamenti)
   RewriteRule ^bb-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
   RewriteRule ^b-and-b-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
@@ -20,7 +30,8 @@
   RewriteRule ^affittacamere-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
 
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(en|de|fr)/strutture/([a-z0-9\-]+)/?$ $1/strutture/$2/index.html [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^strutture/([a-z0-9\-]+)/?$ strutture/$1/index.html [L]
 </IfModule>
 
@@ -30,4 +41,5 @@
   </FilesMatch>
 </IfModule>
 
+DirectoryIndex index.html
 Options -Indexes
