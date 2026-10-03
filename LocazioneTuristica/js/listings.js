@@ -17,11 +17,7 @@ window.MAGENTA_STAY_LISTINGS = [
     propertyType: "Entire home / studio",
     checkIn: "15:00",
     checkOut: "11:00",
-    airbnbId: null,
-    airbnbUrl: null,
-    // AvaiBook ID alloggio
     avaibookPropertyId: "408300",
-    // Optional bookonline.pro embed URL / widget code later
     avaibookEmbed: null,
     highlights: ["~15 min Rho Fiera", "~20 min Malpensa", "Terrace", "Full kitchen"],
     cover: "/immagini/sanchioli-11/foto-01.jpg",
