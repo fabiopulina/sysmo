@@ -89,11 +89,10 @@
   }
 
   function renderGrid(list) {
-    var show = list.slice(0, Math.min(9, list.length));
-    gallery.classList.toggle("p-hero-grid--many", show.length > 5);
-    gallery.innerHTML = show
+    gallery.classList.toggle("p-hero-grid--many", list.length > 5);
+    gallery.innerHTML = list
       .map(function (src, i) {
-        var alt = i === 0 ? "Copertina alloggio" : "Foto " + (i + 1);
+        var alt = i === 0 ? "Copertina alloggio" : "Sanchioli 11 · foto " + pad2(i);
         var extra = i === 0 ? ' fetchpriority="high"' : ' loading="lazy"';
         return (
           '<a href="' +
@@ -204,7 +203,24 @@
   probeFolder("/immagini/sanchioli-11/", 0, 80, function (probed) {
     var all = coverFirst(uniqueKeepOrder(probed.length ? probed : images));
     if (!all.length) return;
-    renderGrid(all);
+    var existing = [];
+    Array.prototype.forEach.call(gallery.querySelectorAll("a[href]"), function (a) {
+      existing.push(a.getAttribute("href"));
+    });
+    var same =
+      existing.length === all.length &&
+      existing.every(function (u, i) {
+        return u === all[i];
+      });
+    if (same) {
+      gallery.classList.toggle("p-hero-grid--many", all.length > 5);
+      if (hint) {
+        var tpl = hintTpl[lang] || hintTpl.it;
+        hint.textContent = tpl.replace("{n}", String(all.length));
+      }
+    } else {
+      renderGrid(all);
+    }
     bindLightbox(all);
     if (window.MAGENTA_STAY_LISTINGS) {
       var rec = window.MAGENTA_STAY_LISTINGS.find(function (l) {
