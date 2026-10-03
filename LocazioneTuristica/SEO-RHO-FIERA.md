@@ -9,7 +9,8 @@ Comparire nelle ricerche tipo:
 
 ## Cosa fa il sito (tecnico)
 1. **Landing pillar** `/fiera-rho-expo/` con titolo/H1/description ricchi di keyword naturali, FAQ + schema.org (LodgingBusiness, FAQPage, BreadcrumbList).
-2. **Alias URL** in `.htaccess` (301) da slug cercabili verso la pillar (es. `/appartamenti-rho-fiera/` → `/fiera-rho-expo/`).
+2. **Alias URL** in `.htaccess` (301) da slug cercabili verso le landing:
+   Rho Fiera (`/appartamenti-rho-fiera/` …), Malpensa (`/alloggio-malpensa/`), Magenta (`/appartamento-magenta/`), Milano (`/alloggio-magenta-milano/`).
 3. **Versioni EN/DE/FR** della stessa landing per traffico Nord Europa.
 4. **Internal linking** da homepage, annunci e scheda Sanchioli.
 5. **Sitemap** aggiornata + hreflang.
