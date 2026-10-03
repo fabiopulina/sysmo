@@ -1,14 +1,21 @@
 (function () {
   var btn = document.querySelector(".menu-btn");
   var nav = document.querySelector(".nav");
-  if (btn && nav) {
-    btn.addEventListener("click", function () {
-      var open = nav.classList.toggle("open");
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
+  // On the listing page, IT/EN/DE/FR must stay on Sanchioli 11 (not home).
+  (function () {
+    var path = (location.pathname || "").replace(/\/+$/, "") + "/";
+    if (path.indexOf("sanchioli-11") === -1) return;
+    var map = {
+      it: "/strutture/sanchioli-11/",
+      en: "/en/strutture/sanchioli-11/",
+      de: "/de/strutture/sanchioli-11/",
+      fr: "/fr/strutture/sanchioli-11/",
+    };
+    document.querySelectorAll(".lang a[hreflang]").forEach(function (a) {
+      var code = (a.getAttribute("hreflang") || "").slice(0, 2);
+      if (map[code]) a.setAttribute("href", map[code]);
     });
-  }
-
-  // Scroll progress bar
+  })();
   var barHost = document.createElement("div");
   barHost.className = "scroll-progress";
   barHost.setAttribute("aria-hidden", "true");
