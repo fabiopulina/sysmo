@@ -41,7 +41,35 @@ bash "/Users/fabio/Documents/Progetti/Siti Web/LocazioneTuristica/COPIA-SU-MAC.s
 ```
 (dopo il primo sync: lo script è nella cartella del sito)
 
-`--delete` allinea il Mac a GitHub, ma **esclude sempre** `config.php`, `Foto/` e le JPEG di `immagini/sanchioli-11/` (master foto sul Mac).
+`--delete` allinea il Mac a GitHub, ma **esclude sempre** `config.php`, `Foto/` e le JPEG di `immagini/sanchioli-11/` (così uno sync non cancella le foto sul Mac).
+
+## 1b) Carica le foto appartamento su GitHub (dal Mac)
+
+La cartella `Documents/.../LocazioneTuristica` **non è** il repo git. Incolla questo:
+
+```bash
+SRC="$HOME/Documents/Progetti/Siti Web/LocazioneTuristica/immagini/sanchioli-11"
+REPO="$HOME/Documents/Progetti/sysmo"
+
+if [ ! -d "$REPO/.git" ]; then
+  git clone https://github.com/fabiopulina/sysmo.git "$REPO"
+fi
+cd "$REPO"
+git fetch origin
+git checkout cursor/locazione-turistica-sanchioli-9e06
+git pull origin cursor/locazione-turistica-sanchioli-9e06
+
+mkdir -p LocazioneTuristica/immagini/sanchioli-11
+cp -f "$SRC"/foto-*.jpg LocazioneTuristica/immagini/sanchioli-11/
+ls LocazioneTuristica/immagini/sanchioli-11/foto-*.jpg | wc -l
+
+git add LocazioneTuristica/immagini/sanchioli-11/foto-*.jpg
+git status
+git commit -m "Add Sanchioli 11 photos foto-00 to foto-20."
+git push origin cursor/locazione-turistica-sanchioli-9e06
+```
+
+Atteso: 21 file (`foto-00.jpg` … `foto-20.jpg`). Non toccare `config.php`.
 
 ## 2) Poi ricarica su Aruba (FileZilla)
 
@@ -50,7 +78,7 @@ Cartella remota: `www.magentastay.it`
 Trascina da `$DEST` (sovrascrivi):
 `index.html`, `css/`, `js/` (incluso `booking.js`), `strutture/`, `en/`, `de/`, `fr/`, `contatti/`, `api/` (proxy + sample), landing, `robots.txt`, `sitemap.xml`, `.htaccess`
 
-**Foto appartamento:** carica tutta `immagini/sanchioli-11/` (`foto-00.jpg` copertina … `foto-20.jpg`). Non arrivano da GitHub.
+**Foto appartamento:** carica tutta `immagini/sanchioli-11/` (`foto-00.jpg` copertina … `foto-20.jpg`), oppure attendi il deploy FTP da GitHub dopo il push.
 
 **Su Aruba:**
 - Carica `api/avaibook/config.php` **solo se** non c’è già, oppure se hai aggiornato il token a mano.

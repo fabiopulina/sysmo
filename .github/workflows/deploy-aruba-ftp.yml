@@ -53,7 +53,5 @@ jobs:
             **/COPIA-SU-MAC*
             **/Foto/**
             **/foto/**
-            **/immagini/sanchioli-11/*.jpg
-            **/immagini/sanchioli-11/*.jpeg
             **/immagini/sanchioli-11/_backup*
             **/.DS_Store
