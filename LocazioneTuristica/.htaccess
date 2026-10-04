@@ -1,0 +1,56 @@
+# Apache (Aruba / Register) — compressione, cache, SEO alias
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS prima dello slash delle cartelle (altrimenti DE/FR fanno 301 verso http e alcuni browser vanno in home)
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://www.magentastay.it%{REQUEST_URI} [R=301,L]
+
+  # Slash finale su HTTPS, non HTTP
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.+)$ https://www.magentastay.it/$1/ [R=301,L]
+
+  # SEO keyword aliases -> landing Fiera Rho (B&B / appartamenti)
+  RewriteRule ^bb-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^b-and-b-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^appartamenti-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^appartamento-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^appartamento-fiera-milano/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^appartamenti-fiera-milano/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^hotel-vicino-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^hotel-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^alloggio-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^alloggio-fiera-milano/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^casa-vacanze-rho-fiera/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^dormire-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^dormire-vicino-fiera-rho/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^locazione-turistica-fiera-milano/?$ /fiera-rho-expo/ [R=301,L]
+  RewriteRule ^alloggio-malpensa/?$ /malpensa/ [R=301,L]
+  RewriteRule ^appartamento-malpensa/?$ /malpensa/ [R=301,L]
+  RewriteRule ^casa-vacanze-malpensa/?$ /malpensa/ [R=301,L]
+  RewriteRule ^dormire-malpensa/?$ /malpensa/ [R=301,L]
+  RewriteRule ^alloggio-vicino-malpensa/?$ /malpensa/ [R=301,L]
+  RewriteRule ^appartamento-magenta/?$ /strutture/sanchioli-11/ [R=301,L]
+  RewriteRule ^casa-vacanze-magenta/?$ /strutture/sanchioli-11/ [R=301,L]
+  RewriteRule ^locazione-turistica-magenta/?$ /strutture/sanchioli-11/ [R=301,L]
+  RewriteRule ^alloggio-magenta-milano/?$ /milano/ [R=301,L]
+  RewriteRule ^appartamento-milano-treno/?$ /milano/ [R=301,L]
+  RewriteRule ^casa-vacanze-milano-ovest/?$ /milano/ [R=301,L]
+  RewriteRule ^dormire-milano-fiera/?$ /fiera-rho-expo/ [R=301,L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(en|de|fr)/strutture/([a-z0-9\-]+)/?$ $1/strutture/$2/index.html [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^strutture/([a-z0-9\-]+)/?$ strutture/$1/index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(jpg|jpeg|png|webp|css|js)$">
+    Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+</IfModule>
+
+DirectoryIndex index.html
+Options -Indexes
