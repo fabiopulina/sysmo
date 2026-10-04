@@ -87,7 +87,7 @@ Trascina da `$DEST` (sovrascrivi):
 ## 3) Check sul sito live
 
 - `https://www.magentastay.it/api/avaibook/proxy.php?action=ping` → `ok: true`
-- Scheda Sanchioli 11 → check-in / check-out / prezzo
+- Scheda Sanchioli 11 → date libere → nome/email → **Invia richiesta** → pratica nel channel AvaiBook
 - Hard refresh: `Cmd+Shift+R` (o scheda privata)
 
 ## AvaiBook

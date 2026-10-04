@@ -734,12 +734,20 @@ body.lightbox-open { overflow: hidden; }
   font-weight: 600;
   color: var(--ink);
 }
-.ab-form input {
+.ab-form input,
+.ab-form textarea {
   font: inherit;
   padding: .55rem .65rem;
   border: 1px solid var(--line);
   background: #fff;
+  width: 100%;
 }
+.ab-form textarea { min-height: 4.5rem; resize: vertical; }
+.ab-guest { margin-top: .85rem; }
+.ab-hp {
+  position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;
+}
+.ab-ok { margin-top: .5rem; }
 .ab-result {
   margin-top: .9rem;
   padding: .85rem;

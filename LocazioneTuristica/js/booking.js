@@ -27,6 +27,7 @@
     root.getAttribute("data-booking-engine") ||
     document.body.getAttribute("data-booking-engine") ||
     "";
+  var allowDirect = true;
 
   if (
     !engineUrl &&
@@ -57,10 +58,20 @@
       offline: "Calendario AvaiBook non ancora configurato sul server (manca token o ID struttura).",
       error: "Impossibile contattare AvaiBook. Riprova più tardi.",
       needDates: "Seleziona check-in e check-out.",
-      request: "Prenota ora",
-      requestUnavailable: "Richiedi altre date",
-      directHint: "Prenotazione diretta su AvaiBook — arriva nel tuo channel, senza WhatsApp.",
-      engineMissing: "Motore prenotazioni AvaiBook non ancora collegato. In config.php imposta booking_engine_url.",
+      request: "Invia richiesta",
+      sending: "Invio al channel AvaiBook…",
+      sent: "Richiesta inviata",
+      sentHint: "La pratica è nel channel AvaiBook. Fabio ti risponde da lì, senza WhatsApp.",
+      name: "Nome",
+      email: "Email",
+      phone: "Telefono",
+      note: "Messaggio (facoltativo)",
+      needGuest: "Inserisci nome e email.",
+      notCertified: "AvaiBook deve ancora certificare le prenotazioni via API. Intanto usa il motore ufficiale o contatta Fabio.",
+      rateLimit: "Troppe richieste. Riprova tra un po’.",
+      bookError: "Invio non riuscito. Riprova o scrivi a Fabio.",
+      directHint: "La richiesta arriva nel channel AvaiBook, senza WhatsApp.",
+      engineAlt: "Apri il motore AvaiBook",
     },
     en: {
       title: "Check availability",
@@ -77,10 +88,20 @@
       offline: "AvaiBook calendar not configured yet (missing token or property id on server).",
       error: "Could not reach AvaiBook. Please try again later.",
       needDates: "Select check-in and check-out.",
-      request: "Book now",
-      requestUnavailable: "Request other dates",
-      directHint: "Direct booking via AvaiBook — goes to your channel, not WhatsApp.",
-      engineMissing: "AvaiBook booking engine URL not set yet (booking_engine_url in config.php).",
+      request: "Send request",
+      sending: "Sending to AvaiBook channel…",
+      sent: "Request sent",
+      sentHint: "The booking is in the AvaiBook channel. Fabio will reply there, not on WhatsApp.",
+      name: "First name",
+      email: "Email",
+      phone: "Phone",
+      note: "Message (optional)",
+      needGuest: "Please enter your name and email.",
+      notCertified: "AvaiBook still needs to certify API bookings. Use the official engine or contact Fabio.",
+      rateLimit: "Too many requests. Please try later.",
+      bookError: "Could not send. Try again or contact Fabio.",
+      directHint: "The request goes to the AvaiBook channel, not WhatsApp.",
+      engineAlt: "Open AvaiBook booking engine",
     },
     de: {
       title: "Verfügbarkeit prüfen",
@@ -97,10 +118,20 @@
       offline: "AvaiBook noch nicht konfiguriert (Token oder Unterkunfts-ID fehlt).",
       error: "AvaiBook nicht erreichbar. Bitte später erneut versuchen.",
       needDates: "Bitte Check-in und Check-out wählen.",
-      request: "Jetzt buchen",
-      requestUnavailable: "Andere Daten anfragen",
-      directHint: "Direktbuchung über AvaiBook — landet in Ihrem Channel, nicht WhatsApp.",
-      engineMissing: "AvaiBook Booking-Engine-URL fehlt noch (booking_engine_url in config.php).",
+      request: "Anfrage senden",
+      sending: "Wird an AvaiBook-Channel gesendet…",
+      sent: "Anfrage gesendet",
+      sentHint: "Die Buchung liegt im AvaiBook-Channel. Fabio antwortet dort, nicht per WhatsApp.",
+      name: "Vorname",
+      email: "E-Mail",
+      phone: "Telefon",
+      note: "Nachricht (optional)",
+      needGuest: "Bitte Name und E-Mail angeben.",
+      notCertified: "AvaiBook muss API-Buchungen noch zertifizieren. Nutzen Sie die Buchungsmaschine oder kontaktieren Sie Fabio.",
+      rateLimit: "Zu viele Anfragen. Bitte später erneut versuchen.",
+      bookError: "Senden fehlgeschlagen. Bitte erneut versuchen oder Fabio kontaktieren.",
+      directHint: "Die Anfrage landet im AvaiBook-Channel, nicht bei WhatsApp.",
+      engineAlt: "AvaiBook-Buchungsmaschine öffnen",
     },
     fr: {
       title: "Vérifier les disponibilités",
@@ -117,10 +148,20 @@
       offline: "Calendrier AvaiBook non configuré (token ou ID manquant).",
       error: "Impossible de joindre AvaiBook. Réessayez plus tard.",
       needDates: "Sélectionnez arrivée et départ.",
-      request: "Réserver maintenant",
-      requestUnavailable: "Demander d’autres dates",
-      directHint: "Réservation directe via AvaiBook — arrive dans votre channel, pas WhatsApp.",
-      engineMissing: "URL du moteur AvaiBook manquante (booking_engine_url dans config.php).",
+      request: "Envoyer la demande",
+      sending: "Envoi vers le channel AvaiBook…",
+      sent: "Demande envoyée",
+      sentHint: "La réservation est dans le channel AvaiBook. Fabio répondra là, pas sur WhatsApp.",
+      name: "Prénom",
+      email: "E-mail",
+      phone: "Téléphone",
+      note: "Message (facultatif)",
+      needGuest: "Indiquez votre nom et e-mail.",
+      notCertified: "AvaiBook doit encore certifier les réservations API. Utilisez le moteur officiel ou contactez Fabio.",
+      rateLimit: "Trop de demandes. Réessayez plus tard.",
+      bookError: "Envoi impossible. Réessayez ou contactez Fabio.",
+      directHint: "La demande arrive dans le channel AvaiBook, pas WhatsApp.",
+      engineAlt: "Ouvrir le moteur AvaiBook",
     },
   };
   var t = i18n[lang] || i18n.it;
@@ -216,7 +257,42 @@
     });
   }
 
-  // Warm ping + calendar load (non-blocking)
+  function postBook(payload) {
+    var q = { action: "book" };
+    if (accId) q.accommodation = accId;
+    var url = proxy + "?" + new URLSearchParams(q).toString();
+    return fetch(url, {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).then(function (r) {
+      return r.json().then(function (j) {
+        return { http: r.status, body: j };
+      });
+    });
+  }
+
+  function engineLink(cin, cout, guests) {
+    var href = buildEngineHref(cin, cout, guests);
+    if (!href) return "";
+    return (
+      '<p style="margin:.7rem 0 0"><a class="btn btn-ghost" href="' +
+      href +
+      '" target="_blank" rel="noopener noreferrer">' +
+      t.engineAlt +
+      "</a></p>"
+    );
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
   api("ping")
     .then(function (res) {
       if (!res.body || !res.body.ok) {
@@ -225,6 +301,9 @@
       }
       if (!engineUrl && res.body.booking_engine_url) {
         engineUrl = String(res.body.booking_engine_url);
+      }
+      if (typeof res.body.allow_direct_booking === "boolean") {
+        allowDirect = res.body.allow_direct_booking;
       }
       if (!accId && res.body.default_accommodation_id) {
         accId = String(res.body.default_accommodation_id);
@@ -282,7 +361,7 @@
           return;
         }
         var code = avail.body.data;
-        // 1 available, 0 not, 2 partial
+        var canBook = (code === 1 || code === "1") && allowDirect;
         var statusText =
           code === 1 || code === "1"
             ? t.available
@@ -297,15 +376,6 @@
             : [price.body.data];
           var p0 = rows[0];
           if (p0) {
-            if (p0.status) {
-              html +=
-                "<p class=\"muted\">Status: " +
-                String(p0.status) +
-                (p0.restrictions && p0.restrictions.length
-                  ? " (" + p0.restrictions.join(", ") + ")"
-                  : "") +
-                "</p>";
-            }
             if (typeof p0.total === "number") {
               html +=
                 "<p>" +
@@ -324,33 +394,122 @@
             }
           }
         }
-        var bookHref = buildEngineHref(cin, cout, guests);
-        var bookLabel = code === 1 || code === "1" || code === 2 || code === "2" ? t.request : t.requestUnavailable;
-        html +=
-          '<p class="muted" style="margin:.7rem 0 0">' +
-          t.directHint +
-          "</p>" +
-          '<div class="actions" style="margin-top:.8rem">' +
-          '<a class="btn btn-primary" ' +
-          (bookHref
-            ? 'href="' + bookHref + '" target="_blank" rel="noopener noreferrer"'
-            : 'href="' +
-              contactPath +
-              "?checkin=" +
-              encodeURIComponent(cin) +
-              "&checkout=" +
-              encodeURIComponent(cout) +
-              "&guests=" +
-              encodeURIComponent(guests) +
-              '"') +
-          ">" +
-          bookLabel +
-          "</a>" +
-          "</div>";
-        if (!bookHref) {
-          html += '<p class="muted" style="margin:.5rem 0 0">' + t.engineMissing + "</p>";
+        html += '<p class="muted" style="margin:.7rem 0 0">' + t.directHint + "</p>";
+        if (canBook) {
+          html +=
+            '<form class="ab-form ab-guest" id="ab-guest">' +
+            '<label class="ab-hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>' +
+            "<label>" +
+            t.name +
+            ' <input type="text" name="name" required autocomplete="given-name"></label>' +
+            "<label>" +
+            t.email +
+            ' <input type="email" name="email" required autocomplete="email"></label>' +
+            "<label>" +
+            t.phone +
+            ' <input type="tel" name="phone" autocomplete="tel"></label>' +
+            "<label>" +
+            t.note +
+            ' <textarea name="note" rows="3" maxlength="1500"></textarea></label>' +
+            '<button type="submit" class="btn btn-primary">' +
+            t.request +
+            "</button>" +
+            "</form>";
+        }
+        html += engineLink(cin, cout, guests);
+        if (!canBook && !engineUrl) {
+          html +=
+            '<p style="margin:.7rem 0 0"><a class="btn btn-primary" href="' +
+            contactPath +
+            "?checkin=" +
+            encodeURIComponent(cin) +
+            "&checkout=" +
+            encodeURIComponent(cout) +
+            "&guests=" +
+            encodeURIComponent(guests) +
+            '">' +
+            t.request +
+            "</a></p>";
         }
         result.innerHTML = html;
+
+        var guest = result.querySelector("#ab-guest");
+        if (!guest) return;
+        guest.addEventListener("submit", function (ev) {
+          ev.preventDefault();
+          var name = (guest.querySelector('[name="name"]').value || "").trim();
+          var email = (guest.querySelector('[name="email"]').value || "").trim();
+          var phone = (guest.querySelector('[name="phone"]').value || "").trim();
+          var note = (guest.querySelector('[name="note"]').value || "").trim();
+          var website = (guest.querySelector('[name="website"]').value || "").trim();
+          if (name.length < 2 || email.indexOf("@") < 1) {
+            hint.textContent = t.needGuest;
+            return;
+          }
+          hint.textContent = "";
+          var btn = guest.querySelector('button[type="submit"]');
+          if (btn) btn.disabled = true;
+          guest.hidden = true;
+          var wait = document.createElement("p");
+          wait.id = "ab-wait";
+          wait.textContent = t.sending;
+          result.appendChild(wait);
+
+          postBook({
+            accommodation: accId,
+            checkin: cin,
+            checkout: cout,
+            guests: Number(guests),
+            name: name,
+            email: email,
+            phone: phone,
+            note: note,
+            website: website,
+            language: lang,
+          })
+            .then(function (res) {
+              wait.remove();
+              guest.hidden = false;
+              if (btn) btn.disabled = false;
+              var err = res.body && res.body.error;
+              if (res.body && res.body.ok) {
+                guest.remove();
+                var done = document.createElement("div");
+                done.className = "ab-ok";
+                done.innerHTML =
+                  "<p><strong>" +
+                  t.sent +
+                  "</strong>" +
+                  (res.body.booking_id
+                    ? " · " + escapeHtml(res.body.booking_id)
+                    : "") +
+                  "</p><p class=\"muted\">" +
+                  t.sentHint +
+                  "</p>";
+                result.appendChild(done);
+                return;
+              }
+              if (err === "not_certified") {
+                hint.textContent = t.notCertified;
+                return;
+              }
+              if (err === "rate_limit") {
+                hint.textContent = t.rateLimit;
+                return;
+              }
+              if (err === "not_available") {
+                hint.textContent = t.notAvailable;
+                return;
+              }
+              hint.textContent = (res.body && res.body.message) || t.bookError;
+            })
+            .catch(function () {
+              wait.remove();
+              guest.hidden = false;
+              if (btn) btn.disabled = false;
+              hint.textContent = t.bookError;
+            });
+        });
       })
       .catch(function () {
         result.textContent = t.error;

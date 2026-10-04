@@ -26,4 +26,12 @@ return [
     // Link motore prenotazioni (Booking engine → Pubblicare sul mio sito → Link web)
     // Esempio: https://....  — apre la prenotazione diretta in AvaiBook (non WhatsApp)
     'booking_engine_url' => '',
+    // Prenotazione dal sito → channel AvaiBook (POST /bookings/ + /messages/)
+    // false = solo calendario/prezzo (niente creazione pratica)
+    'allow_direct_booking' => true,
+    // PENDING_PAYMENT = arriva nel channel, tu confermi in AvaiBook
+    // CONFIRMED = occupa subito il calendario
+    'booking_status' => 'PENDING_PAYMENT',
+    // Vuoto = preso in automatico dal prezzo/elenco alloggi
+    'default_unit_id' => '',
 ];
