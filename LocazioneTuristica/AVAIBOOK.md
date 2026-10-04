@@ -35,11 +35,25 @@ Non sovrascrivere `config.php` dallo sync GitHub.
 - Scheda Sanchioli 11 → date libere → nome/email → **Invia richiesta**
 - In AvaiBook: nuova pratica origine `API_OWNER` e messaggio nel channel
 
-## Certificazione
-`POST /bookings/` e `POST /messages/` su `.com` funzionano dopo il form AvaiBook + test su `.biz`.  
-Se il sito risponde `not_certified`, completa la certificazione; calendario e prezzo restano comunque attivi.
+## Certificazione (cosa fare tu)
 
-Pre-produzione: login https://app.avaibook.biz/login.php · `base_url` `https://api.avaibook.biz` · `env` => `biz`
+Senza questo, calendario e prezzo funzionano; **Invia richiesta** può rispondere `not_certified`.
+Serve piano **Pro o Elite**. Risposta AvaiBook: 24–72 ore (`api.support@avaibook.com`).
+
+1. **Form**  
+   Nel conto AvaiBook: **Integrazioni → API → Form**  
+   (è lo stesso modulo Microsoft che hai aperto).  
+   Scrivi in sintesi: sito proprio `https://www.magentastay.it`, alloggio Sanchioli 11 (`408300`), il sito deve **creare prenotazioni** e **inviare messaggi nel channel** (Owner API `POST /bookings/` e `POST /messages/`). Sviluppatore: tu / Magenta Stay. Email con cui vuoi l’ambiente di test.
+2. **Attendi l’email** con accesso a **pre-produzione** `.biz` (password + API key di test). Login: https://app.avaibook.biz/login.php
+3. **Test** (solo sul Mac, non sul sito live): in `config.php` temporaneamente  
+   `env` = `biz` · `base_url` = `https://api.avaibook.biz` · `token` = chiave **.biz**  
+   Poi dalla scheda annuncio: date libere → nome/email → Invia richiesta. In AvaiBook `.biz` deve comparire la pratica e il messaggio nel channel.
+4. **Scrivi ad AvaiBook** (`api.support@avaibook.com`): test ok, chiedi la certificazione e l’attivazione sul conto **reale** `.com`.
+5. **Produzione:** rimetti `config.php` su  
+   `env` = `com` · `base_url` = `https://api.avaibook.com` · `token` = chiave **owner** del conto vero.  
+   Non caricare su Aruba il token `.biz`. Non sovrascrivere il `config.php` già presente su Aruba.
+
+Docs: https://api.avaibook.com/doc/owner/ · prova chiamate: https://api.avaibook.com/doc/owner/api/
 
 ## Endpoint
 
