@@ -26,7 +26,7 @@ AvaiBook è la **guida prezzi**. Gli altri siti devono avere tariffe coerenti e 
 | Canale | Dove si imposta | Note |
 |---|---|---|
 | AvaiBook (motore/sito) | Alloggio → Opzioni di prenotazione → Accettazione immediata | **Impostata** (non più “su richiesta”). |
-| VRBO | Area proprietario → Norme e politiche → Tipo di prenotazione | **Impostata** Prenotazione Immediata (non la variante “solo richieste anticipate”). |
+| VRBO | Area proprietario → Norme e politiche → Tipo di prenotazione | **Impostata** Prenotazione Immediata (confermato dall’host). Non usare la variante “solo richieste anticipate”. |
 | Booking.com | Extranet → Struttura → Politiche → *Come ricevi le prenotazioni* | **Non sync da AvaiBook**. Verificare: “Tutti gli ospiti possono prenotare subito”. |
 | Airbnb | Annuncio → Impostazioni prenotazione | Attivare Prenotazione immediata. |
 | Rentalia / HomeToGo / VRBO XML | Connessione canale in AvaiBook | Modalità impostabile in connessione AvaiBook. |
@@ -92,7 +92,7 @@ Guida AvaiBook campione: **€87,96 / notte** (10–12 nov 2026, 2 ospiti → to
 | Booking.com | Genius / promo solo su Booking | Extranet Booking | Policy su Booking | Prezzi sì; promo **no** | Compilare % Agreement |
 | Airbnb | Solo LM/Early/Long via set regole | AvaiBook → Airbnb → Set di regole | Policy Airbnb | Prezzi sì; offerte via set regole | Non duplicare promo su Airbnb |
 | HomeToGo | Verificare sync | AvaiBook se collegato | Da annuncio | Dipende da CM | Confermare prezzo = AvaiBook |
-| VRBO / Expedia | Promo ~10% (early, LM, mobile, iscritti, nuova struttura) — non cumulabili | Solo VRBO | Federica: valutare 5 giorni flessibile | Via AvaiBook XML se collegato | Instant Booking impostata; rispondere a Federica cosa attivato |
+| VRBO / Expedia | Promo ~10% (early, LM, mobile, iscritti, nuova struttura) — non cumulabili | Solo VRBO | Federica: valutare 5 giorni flessibile | Via AvaiBook XML se collegato | **Prenotazione immediata impostata**; restano promo ~10% e cancel 5gg da confermare a Federica |
 | HousingAnywhere | Promo −15% su HA | Solo HA | Rigida (&lt;24h / dopo no rimborso) | No | Strategia mid-term vs turistico da decidere |
 
 ---
