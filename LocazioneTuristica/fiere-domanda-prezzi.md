@@ -15,7 +15,40 @@ Criterio domanda (Magenta, ~15 min da Rho):
 
 > Nota: tanti visitatori ≠ tariffe alte. Artigiano ~1M visitatori ma ADR hotel −40%; Salone ~300k ma ADR hotel al top.
 
-> **AvaiBook:** non usare `/` nel nome stagione — il salvataggio fallisce. Usa trattino o spazio (es. `VISCOM - Golosaria`).
+> **AvaiBook:** non usare `/` nel nome stagione — il salvataggio fallisce. Usa trattino o spazio (es. `VISCOM - Golosaria`).  
+> **Date:** le stagioni non devono sovrapporsi. SIMEI (17–20 nov) e AutoClassica (19–22 nov) sono unite in **una sola** stagione 17–22 nov.
+
+---
+
+## Già presenti in AvaiBook (9) — solo rinominare / prezzi
+
+| Date (inclusive) | Nome attuale tipico | → Rinominare | D–G | V–S |
+|---|---|---|---|---|
+| 29 set – 6 ott 2026 | Stagione 1 | Salone Franchising CPHI-FIATA | 105 | 105 |
+| 13 – 16 ott 2026 | Stagione 3 | BI-MU | 115 | 115 |
+| 28 – 31 ott 2026 | Stagione 6 | VISCOM - Golosaria | 108 | 108 |
+| 3 – 8 nov 2026 | 03/11/2026… | EICMA | 145 | 150 |
+| 5 – 13 dic 2026 | 05/12/2026… | Artigiano in Fiera | 105 | 110 |
+| 5 – 8 feb 2027 | Stagione 12 | MIDO | 128 | 128 |
+| 12 – 19 apr 2027 | Stagione 14 | Salone del Mobile | 150 | 150 |
+| 2 – 7 mag 2027 | Stagione 16 | Pre-Made in Steel | 110 | 110 |
+| 21 – 27 ott 2027 | Stagione 20 | Host Milano | 138 | 138 |
+
+## Da creare (8) — nessun overlap con le 9 sopra
+
+| Date (inclusive) | Nome | D–G | V–S | Slot libero tra… |
+|---|---|---|---|---|
+| 20 – 22 ott 2026 | NetZero Milano | 105 | 105 | dopo BI-MU (finisce 16), prima ExpoDetergo |
+| 23 – 26 ott 2026 | ExpoDetergo | 108 | 108 | dopo NetZero (22), prima VISCOM (28) — gap 27 ott = base |
+| 17 – 22 nov 2026 | SIMEI - AutoClassica | 115 | 120 | dopo EICMA (8), prima Games Week (27) |
+| 27 – 29 nov 2026 | Milan Games Week | 112 | 117 | dopo SIMEI (22), prima Artigiano (5 dic) |
+| 9 – 11 feb 2027 | BIT | 140 | 140 | subito dopo MIDO (finisce 8 feb) — contigue OK |
+| 11 – 14 mag 2027 | Made in Steel - LAMIERA | 118 | 118 | dopo Pre-Made (7 mag) |
+| 4 – 8 ott 2027 | EMO Milano | 135 | 135 | prima di Host (21 ott) |
+| 9 – 14 nov 2027 | EICMA 2027 | 145 | 150 | dopo Host (27 ott) |
+
+**Verifica overlap (tutte e 17 insieme):** nessuna sovrapposizione.  
+**Non creare** SIMEI e AutoClassica separate (si sovrappongono il 19–20 nov).
 
 ---
 
