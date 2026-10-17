@@ -37,7 +37,7 @@ Prezzi AvaiBook di riferimento (prima dei markup OTA), da `fiere-domanda-prezzi.
 | Airbnb | **198 €** tot | ~99 € | **277 €** tot | ~138,50 € | Markup ~+16%; tot include fee guest |
 | Rentalia | **199,50 €** tot (99,75 €/n) | ~100 € | **278,25 €** tot (139,12 €/n) | ~139 € | Sync OK |
 | Expedia | **~$101/notte** (~254 $ tot) | ~101 $ | *(captcha)* | — | A letto; B bloccato bot |
-| VRBO | *(captcha)* | — | *(captcha)* | — | **Da aggiornare a mano** |
+| VRBO `p12260884` | **230 €** tot (tasse incl.) | ~115 € | *(da verificare)* | — | Link diretto OK; ~+21% vs Magenta Stay 190 |
 
 Picco EICMA ≈ **+40%** vs midweek su tutti i canali letti.
 
