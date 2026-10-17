@@ -23,7 +23,7 @@ Prezzi AvaiBook di riferimento (prima dei markup OTA), da `fiere-domanda-prezzi.
 | Rentalia | https://it.rentalia.com/1043251 | Sì | No |
 | HomeToGo | https://www.hometogo.it/rental/425c00291ea2ccb1 | Sì (se collegato) | Verificare a mano |
 | Expedia | https://www.expedia.com/Milan-Hotels-Studio-Apartment-In-Magenta-Near-Rho-Fiera.h136647276.Hotel-Information | **No / fragile** (rosso in AvaiBook) | **Sì — aggiorna qui** |
-| VRBO | cerca via Expedia Group / Partner Central · hotel `136647276` | **No** (bot + non sync) | **Sì — aggiorna qui** |
+| VRBO | https://www.vrbo.com/it-it/affitto-vacanze/p12260884 · `p12260884` / Expedia `136647276` | **No** (bot + non sync) | **Sì — aggiorna qui** |
 | HousingAnywhere | https://housinganywhere.com/it/room/ut1744431/it/Magenta/via-fratelli-sanchioli | No (mensile) | Solo mid-term |
 
 ---
